@@ -1,5 +1,8 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
+import { registrarPrompts } from "./prompts/index.js";
+import { registrarResources } from "./resources/index.js";
+import { registrarTools } from "./tools/index.js";
 
 // Instancia central del servidor: aquí se registran tools, resources y prompts.
 export function crearServidor(): McpServer {
@@ -21,6 +24,10 @@ export function crearServidor(): McpServer {
       structuredContent: { mensaje: "pong" },
     }),
   );
+
+  registrarTools(server);
+  registrarResources(server);
+  registrarPrompts(server);
 
   return server;
 }

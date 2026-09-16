@@ -21,11 +21,11 @@
 - [x] `domain/diagnostico.ts` (puntaje de presencia digital) + pruebas
 
 ## Fase 3 — Capacidades MCP (2 días)
-- [ ] Tools: `buscar_negocios`, `detalle_negocio`, `negocios_abiertos`, `diagnostico_digital`
-- [ ] Resources: `directorio://categorias`, `sdda://servicios`
-- [ ] Prompts: `recomendar_negocio`, `propuesta_sdda`
-- [ ] Probar cada capacidad en MCP Inspector
-- [ ] Conectar en Claude Desktop (`claude_desktop_config.json`) y probar 5 preguntas reales
+- [x] Tools: `buscar_negocios`, `detalle_negocio`, `negocios_abiertos`, `diagnostico_digital`
+- [x] Resources: `directorio://categorias`, `sdda://servicios`
+- [x] Prompts: `recomendar_negocio`, `propuesta_sdda`
+- [x] Probar cada capacidad en MCP Inspector
+- [ ] Conectar en Claude Desktop (`claude_desktop_config.json` ✅ ya tiene la entrada `directorio-acambaro`; falta reiniciar la app y probar 5 preguntas reales a mano)
 
 ## Fase 4 — Calidad y CI (1 día)
 - [ ] GitHub Actions: lint + test + build en cada push/PR

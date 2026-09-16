@@ -1,5 +1,7 @@
 export type Dia = "lun" | "mar" | "mie" | "jue" | "vie" | "sab" | "dom";
 
+export const DIAS: readonly Dia[] = ["lun", "mar", "mie", "jue", "vie", "sab", "dom"];
+
 export interface Redes {
   facebook?: string;
   instagram?: string;

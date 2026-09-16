@@ -1,0 +1,18 @@
+[Unit]
+Description=MCP Directorio Acámbaro (Streamable HTTP)
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/mcp-directorio-acambaro
+EnvironmentFile=/opt/mcp-directorio-acambaro/.env
+ExecStart=/usr/bin/node dist/http.js
+Restart=on-failure
+RestartSec=5
+User=mcp-directorio
+NoNewPrivileges=true
+ProtectSystem=strict
+ReadWritePaths=/opt/mcp-directorio-acambaro
+
+[Install]
+WantedBy=multi-user.target

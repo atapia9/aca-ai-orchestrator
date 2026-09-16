@@ -28,10 +28,10 @@
 - [ ] Conectar en Claude Desktop (`claude_desktop_config.json` ✅ ya tiene la entrada `directorio-acambaro`; falta reiniciar la app y probar 5 preguntas reales a mano)
 
 ## Fase 4 — Calidad y CI (1 día)
-- [ ] GitHub Actions: lint + test + build en cada push/PR
-- [ ] Cobertura ≥ 80 % en `domain/`
-- [ ] Manejo de errores claro (id inexistente, parámetros inválidos)
-- [ ] Tag `v0.1.0` y release
+- [x] GitHub Actions: lint + test + build en cada push/PR
+- [x] Cobertura ≥ 80 % en `domain/`
+- [x] Manejo de errores claro (id inexistente, parámetros inválidos)
+- [x] Tag `v0.1.0` y release
 
 ## Fase 5 — Persistencia y despliegue (3 días)
 - [ ] Migrar repositorio a SQLite (misma interfaz)

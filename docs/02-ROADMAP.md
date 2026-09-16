@@ -34,7 +34,7 @@
 - [x] Tag `v0.1.0` y [release](https://github.com/atapia9/mcp-directorio-acambaro/releases/tag/v0.1.0)
 
 ## Fase 5 — Persistencia y despliegue (3 días)
-- [ ] Migrar repositorio a SQLite (misma interfaz)
+- [x] Migrar repositorio a SQLite (misma interfaz)
 - [ ] `src/http.ts` con Streamable HTTP
 - [ ] Desplegar en instancia OCI A1 (systemd o Docker) tras Cloudflare, HTTPS
 - [ ] Token simple por header para limitar acceso

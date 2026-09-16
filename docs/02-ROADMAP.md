@@ -25,7 +25,7 @@
 - [x] Resources: `directorio://categorias`, `sdda://servicios`
 - [x] Prompts: `recomendar_negocio`, `propuesta_sdda`
 - [x] Probar cada capacidad en MCP Inspector
-- [ ] Conectar en Claude Desktop (`claude_desktop_config.json` ✅ ya tiene la entrada `directorio-acambaro`; falta reiniciar la app y probar 5 preguntas reales a mano)
+- [ ] Conectar en Claude Desktop y probar 5 preguntas reales — nota: en esta app híbrida (Claude Code + Desktop), `claude_desktop_config.json` es gestionado por la propia app y sobrescribe ediciones manuales de `mcpServers`; conéctalo desde Settings/Conectores dentro de la app en vez de editar el archivo a mano
 
 ## Fase 4 — Calidad y CI (1 día)
 - [x] GitHub Actions: lint + test + build en cada push/PR

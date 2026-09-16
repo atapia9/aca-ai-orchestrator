@@ -15,10 +15,10 @@
 - [x] Commit: `feat: esqueleto del servidor MCP`
 
 ## Fase 2 — Dominio y datos (2 días)
-- [ ] `negocios.json` con 15–30 negocios ficticios en 6+ categorías
-- [ ] `domain/horario.ts` (abierto ahora, zona horaria MX) + pruebas
-- [ ] `domain/busqueda.ts` (texto, categoría, colonia, sin acentos) + pruebas
-- [ ] `domain/diagnostico.ts` (puntaje de presencia digital) + pruebas
+- [x] `negocios.json` con 15–30 negocios ficticios en 6+ categorías
+- [x] `domain/horario.ts` (abierto ahora, zona horaria MX) + pruebas
+- [x] `domain/busqueda.ts` (texto, categoría, colonia, sin acentos) + pruebas
+- [x] `domain/diagnostico.ts` (puntaje de presencia digital) + pruebas
 
 ## Fase 3 — Capacidades MCP (2 días)
 - [ ] Tools: `buscar_negocios`, `detalle_negocio`, `negocios_abiertos`, `diagnostico_digital`

@@ -4,15 +4,15 @@
 
 ## Fase 0 — Preparación (1 día)
 - [x] Crear repo público `atapia9/mcp-directorio-acambaro` (MIT, `.gitignore` Node)
-- [ ] Instalar Node 20+, Claude Desktop y Claude Code (Node 20+ y Claude Code ✅; falta confirmar Claude Desktop)
+- [x] Instalar Node 20+, Claude Desktop y Claude Code
 - [x] Copiar estos `.md` a `docs/` y `CLAUDE.md` a la raíz
 - [ ] Leer la documentación oficial: modelcontextprotocol.io (quickstart servidor TS)
 
 ## Fase 1 — Esqueleto (1 día)
-- [ ] `npm init`, TypeScript, ESLint, Prettier, vitest
-- [ ] `src/index.ts` con `McpServer` + `StdioServerTransport`
-- [ ] Tool de prueba `ping` y verificación en MCP Inspector
-- [ ] Commit: `feat: esqueleto del servidor MCP`
+- [x] `npm init`, TypeScript, ESLint, Prettier, vitest
+- [x] `src/index.ts` con `McpServer` + `StdioServerTransport`
+- [x] Tool de prueba `ping` y verificación en MCP Inspector
+- [x] Commit: `feat: esqueleto del servidor MCP`
 
 ## Fase 2 — Dominio y datos (2 días)
 - [ ] `negocios.json` con 15–30 negocios ficticios en 6+ categorías

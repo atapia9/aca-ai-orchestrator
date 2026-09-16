@@ -31,12 +31,7 @@
 - [x] GitHub Actions: lint + test + build en cada push/PR
 - [x] Cobertura ≥ 80 % en `domain/`
 - [x] Manejo de errores claro (id inexistente, parámetros inválidos)
-- [ ] Tag `v0.1.0` (creado localmente ✅) y release — pendiente `git push` y `gh release create` hasta autorizar el scope `workflow` en `gh` (ver nota abajo)
-
-> **Nota:** el push a `main` quedó bloqueado porque el token de `gh` no tiene el scope `workflow`
-> (necesario porque el commit toca `.github/workflows/ci.yml`). Corre en tu terminal:
-> `gh auth refresh -h github.com -s workflow`
-> y avisa para reintentar el push, crear el tag remoto y el release de `v0.1.0`.
+- [x] Tag `v0.1.0` y [release](https://github.com/atapia9/mcp-directorio-acambaro/releases/tag/v0.1.0)
 
 ## Fase 5 — Persistencia y despliegue (3 días)
 - [ ] Migrar repositorio a SQLite (misma interfaz)

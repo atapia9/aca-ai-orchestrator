@@ -3,9 +3,9 @@
 > **En una línea:** los pasos, en orden, para pasar de repo vacío a MCP desplegado y presentable en el portafolio.
 
 ## Fase 0 — Preparación (1 día)
-- [ ] Crear repo público `atapia9/mcp-directorio-acambaro` (MIT, `.gitignore` Node)
-- [ ] Instalar Node 20+, Claude Desktop y Claude Code
-- [ ] Copiar estos `.md` a `docs/` y `CLAUDE.md` a la raíz
+- [x] Crear repo público `atapia9/mcp-directorio-acambaro` (MIT, `.gitignore` Node)
+- [ ] Instalar Node 20+, Claude Desktop y Claude Code (Node 20+ y Claude Code ✅; falta confirmar Claude Desktop)
+- [x] Copiar estos `.md` a `docs/` y `CLAUDE.md` a la raíz
 - [ ] Leer la documentación oficial: modelcontextprotocol.io (quickstart servidor TS)
 
 ## Fase 1 — Esqueleto (1 día)

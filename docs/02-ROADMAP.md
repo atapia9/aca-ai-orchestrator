@@ -35,9 +35,9 @@
 
 ## Fase 5 — Persistencia y despliegue (3 días)
 - [x] Migrar repositorio a SQLite (misma interfaz)
-- [ ] `src/http.ts` con Streamable HTTP
+- [x] `src/http.ts` con Streamable HTTP
 - [ ] Desplegar en instancia OCI A1 (systemd o Docker) tras Cloudflare, HTTPS
-- [ ] Token simple por header para limitar acceso
+- [x] Token simple por header para limitar acceso
 - [ ] Tag `v0.2.0`
 
 ## Fase 6 — Integración y vitrina (2 días)

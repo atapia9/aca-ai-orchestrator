@@ -24,7 +24,9 @@ El propósito de `data/inegi/` es distinto: es material de investigación para p
 
 Columnas: `clave_scian`, `nombre_clase_scian`, `rama_cod`, `rama_nombre`, `subsector_cod`, `subsector_nombre`, `categoria_directorio`.
 
-La columna `categoria_directorio` mapea 34 de esas clases a las 11 categorías que **ya existen** en `src/data/negocios.json` / el resource `directorio://categorias` (ver `src/domain/tipos.ts`):
+La columna `categoria_directorio` mapea **139 de las 151 clases (92 %)** a 65 categorías: las 11 que **ya existen** en `src/data/negocios.json` / el resource `directorio://categorias` (ver `src/domain/tipos.ts`), más 54 categorías **nuevas propuestas** para giros que Acámbaro seguramente tiene pero que el MVP aún no cubre. `categoria` es un `string` libre en `src/domain/tipos.ts` (no un enum fijo), así que agregar categorías nuevas más adelante no requiere ningún cambio de código, solo datos.
+
+**Las 11 categorías que ya existen en el MVP:**
 
 | categoria_directorio | claves SCIAN |
 |---|---|
@@ -32,15 +34,41 @@ La columna `categoria_directorio` mapea 34 de esas clases a las 11 categorías q
 | `restaurante` | 722511, 722512, 722513, 722514, 722516, 722518, 722519 |
 | `pizzeria` | 722517 |
 | `panaderia` | 311812 |
-| `ferreteria` | 467111 |
-| `farmacia` | 464111, 464112 |
-| `taller_mecanico` | 811111, 811112, 811113, 811114, 811115, 811116, 811119, 811121, 811122, 811123, 811129, 811191, 811192, 811199 (toda la rama 8111, reparación automotriz) |
-| `tienda_ropa` | 463211, 463212, 463216 |
-| `papeleria` | 465311 |
-| `veterinaria` | 541941, 541942 |
+| `ferreteria` | 467111, 467112, 467113, 467114, 467115, 467116, 467117 (toda la rama 4671: ferretería, tlapalería, pintura, vidrios, materiales de construcción) |
+| `farmacia` | 464111, 464112, 463217 (pañales, venta típica de farmacia/minisúper) |
+| `taller_mecanico` | 811111–811199 (toda la rama 8111, reparación automotriz) |
+| `tienda_ropa` | 463211, 463212, 463213, 463214, 463216, 463218 |
+| `papeleria` | 465311, 465313 (papelería, revistas y periódicos) |
+| `veterinaria` | 541941, 541942 (mascotas), 541943, 541944 (ganadería) |
 | `salon_belleza` | 812110 (incluye peluquerías y barberías: el SCIAN no las separa) |
 
-Las otras 117 filas quedan con `categoria_directorio` vacío: son giros reales y frecuentes en una ciudad como Acámbaro (tiendas de abarrotes, carnicerías, fruterías, tortillerías, hoteles, lavanderías, ferreterías especializadas en pintura/vidrio, ópticas, papelerías con venta de libros, etc.) que **todavía no tienen categoría propia** en el MVP. Quedan documentadas como candidatas para cuando se amplíe el catálogo de categorías.
+**54 categorías nuevas propuestas** (agrupadas por tema; cada una con 1-8 clases SCIAN — el detalle exacto está en el CSV, columna `categoria_directorio`):
+
+- **Alimentos frescos y de barrio:** `abarrotes`, `carniceria`, `pescaderia`, `fruteria`, `cremeria`, `dulceria`, `paleteria`, `licoreria`, `tortilleria`.
+- **Autoservicio y tiendas grandes:** `supermercado`, `minisuper`, `tienda_departamental`, `segunda_mano`.
+- **Ropa, calzado y accesorios:** `merceria`, `joyeria`, `zapateria`.
+- **Salud y cuidado personal:** `tienda_naturista`, `optica`, `ortopedia`, `perfumeria`.
+- **Esparcimiento y regalos:** `jugueteria`, `bicicletas`, `foto_estudio`, `tienda_deportiva`, `tienda_musical`, `libreria`, `tienda_mascotas`, `regalos`, `articulos_religiosos`.
+- **Hogar y tecnología:** `muebleria`, `electrodomesticos`, `computadoras`, `telefonia`, `decoracion`, `floreria`.
+- **Vehículos y combustibles:** `agencia_autos`, `refaccionaria`, `llantera`, `motos`, `gasolinera`, `gasera`.
+- **Hospedaje y alimentos fuera de casa:** `hospedaje` (hoteles, moteles, cabañas, pensiones), `banquetes`, `comida_movil`, `vida_nocturna`, `bar`.
+- **Reparación y servicios personales:** `reparacion_electronicos`, `reparacion_electrodomesticos`, `tapiceria`, `reparacion_calzado`, `cerrajeria`, `lavanderia`, `funeraria`, `estacionamiento`.
+
+**Las 12 clases que quedan sin mapear** son, a propósito, las que no encajan bien en un directorio de comercio local de cara al público:
+
+| clave_scian | nombre | por qué queda fuera |
+|---|---|---|
+| 311811 | Panificación industrial | escala de fábrica, no un local de barrio (distinto de `panaderia` = 311812, panificación tradicional) |
+| 311820 | Elaboración de galletas y pastas para sopa | igual: producción industrial, no venta directa al público |
+| 465211 | Grabaciones de audio y video en medios físicos | formato en desuso, muy poco probable como negocio activo hoy |
+| 722310 | Servicios de comedor para empresas e instituciones | contrato B2B (comedores industriales), no un local al que el público entra |
+| 811311–811314 | Reparación de maquinaria agropecuaria/industrial/comercial | servicio B2B especializado, no un giro típico de directorio al consumidor |
+| 811499 | Otros artículos para el hogar y personales (reparación) | cajón "otros", demasiado ambiguo para una categoría propia |
+| 812120 | Baños públicos | infraestructura pública, no un negocio privado típico |
+| 812130 | Sanitarios públicos y bolerías | ídem, categoría compuesta y poco frecuente |
+| 812990 | Otros servicios personales | cajón "otros", demasiado ambiguo |
+
+Si en el futuro aparece un negocio real de Acámbaro que caiga en una de estas clases, lo razonable es crear la categoría en ese momento (con el nombre real del negocio como referencia) en vez de adivinar una ahora.
 
 ## Fuente y método
 

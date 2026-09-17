@@ -42,9 +42,9 @@
 
 ## Fase 6 — Integración y vitrina (2 días)
 - [ ] (Opcional) Sincronizar con WordPress REST de staging.acambaro.com.mx
-- [ ] README final: badges, GIF demo, diagrama, instalación en 5 min
+- [ ] README final: badges, GIF demo, diagrama, instalación en 5 min — hecho salvo el GIF (badges, diagrama, instalación y sección "Ejemplo de uso" con salida real ya están); el GIF se graba una vez desplegado
 - [ ] Publicar en LinkedIn + fijar repo en perfil GitHub
-- [ ] (Opcional) Registrar en listados públicos de servidores MCP
+- [ ] (Opcional) Registrar en listados públicos de servidores MCP — `server.json` ya preparado (ver `docs/03-DESPLIEGUE.md`); falta correr `mcp-publisher publish` tras el despliegue
 - [ ] Tag `v1.0.0`
 
 ## Estimado total

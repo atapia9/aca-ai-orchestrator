@@ -80,6 +80,26 @@ deploy/verificar.sh https://<tu-dominio> <tu-token>
 Corre `GET /salud`, confirma que `POST /mcp` sin token da 401, y que con el token correcto
 responde el `initialize` de MCP. Ya se probó contra una instancia local (ver arriba).
 
+## Registro público en el MCP Registry (Fase 6, opcional)
+
+[`server.json`](../server.json) ya está preparado (formato oficial de
+[modelcontextprotocol/registry](https://github.com/modelcontextprotocol/registry)), apuntando
+como servidor remoto Streamable HTTP a `https://mcp.acambaro.com.mx/mcp` (ajustar si el dominio
+final es otro) con autenticación por `Authorization: Bearer <token>`.
+
+**No se ha enviado nada todavía** — falta, una vez desplegado y verificado:
+
+```bash
+# Instalar la CLI oficial (una vez):
+curl -L "https://github.com/modelcontextprotocol/registry/releases/latest/download/mcp-publisher_$(uname -s | tr '[:upper:]' '[:lower:]')_$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/').tar.gz" | tar xz mcp-publisher && sudo mv mcp-publisher /usr/local/bin/
+
+# Autenticarse con GitHub (abre el navegador, pide confirmar un código):
+mcp-publisher login github
+
+# Publicar (envía server.json al registro público):
+mcp-publisher publish
+```
+
 ## Pendiente
 
 - [ ] Acceso SSH a la instancia OCI A1.
@@ -88,3 +108,4 @@ responde el `initialize` de MCP. Ya se probó contra una instancia local (ver ar
 - [ ] Elegir Docker o systemd.
 - [ ] Ejecutar el despliegue y verificar con los comandos de arriba.
 - [ ] Tag `v0.2.0` una vez verificado en producción.
+- [ ] (Opcional) Confirmar el dominio final en `server.json` y correr `mcp-publisher publish`.

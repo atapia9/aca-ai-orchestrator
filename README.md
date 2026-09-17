@@ -55,6 +55,25 @@ flowchart TD
 - **Transportes:** stdio (`src/index.ts`) para Claude Desktop/Code, y Streamable HTTP con token por header (`src/http.ts`) para despliegue remoto.
 - **Datos:** 21 negocios ficticios en 11 categorías, servidos desde SQLite (`src/data/repo.ts`).
 
+## Ejemplo de uso
+
+Salida real de la tool `diagnostico_digital` (probada con MCP Inspector y por stdio):
+
+> **Prompt:** "¿Qué tan bien está la presencia digital de la Ferretería El Tornillo Feliz?"
+
+```
+Ferretería El Tornillo Feliz: 20/100 (nivel bajo)
+  ❌ Sitio web propio (25 pts)
+  ❌ WhatsApp de contacto (20 pts)
+  ❌ Presencia en redes sociales (20 pts)
+  ❌ Ubicación en Google Maps (15 pts)
+  ✅ Teléfono de contacto (10 pts)
+  ✅ Descripción con contenido suficiente (10 pts)
+Servicio sugerido: Diagnóstico y arranque digital SDDA: presencia básica (perfil, WhatsApp, ubicación).
+```
+
+> GIF de demo en vivo: pendiente de grabar una vez desplegado en producción (ver [`docs/02-ROADMAP.md`](docs/02-ROADMAP.md), Fase 6).
+
 ## Instalación en 5 minutos
 
 ```bash

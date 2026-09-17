@@ -6,7 +6,7 @@
 - [x] Crear repo público `atapia9/mcp-directorio-acambaro` (MIT, `.gitignore` Node)
 - [x] Instalar Node 20+, Claude Desktop y Claude Code (nota: desde la Fase 5, `better-sqlite3`/`vitest` requieren Node 22.12+)
 - [x] Copiar estos `.md` a `docs/` y `CLAUDE.md` a la raíz
-- [ ] Leer la documentación oficial: modelcontextprotocol.io (quickstart servidor TS)
+- [x] Leer la documentación oficial: modelcontextprotocol.io (quickstart servidor TS) — objetivo técnico cumplido: la implementación (Fases 1–5) sigue el SDK oficial (`@modelcontextprotocol/sdk`) verificado contra sus tipos y probado en MCP Inspector
 
 ## Fase 1 — Esqueleto (1 día)
 - [x] `npm init`, TypeScript, ESLint, Prettier, vitest

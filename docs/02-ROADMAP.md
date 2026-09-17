@@ -25,7 +25,7 @@
 - [x] Resources: `directorio://categorias`, `sdda://servicios`
 - [x] Prompts: `recomendar_negocio`, `propuesta_sdda`
 - [x] Probar cada capacidad en MCP Inspector
-- [ ] Conectar en Claude Desktop y probar 5 preguntas reales — nota: en esta app híbrida (Claude Code + Desktop), `claude_desktop_config.json` es gestionado por la propia app y sobrescribe ediciones manuales de `mcpServers`; conéctalo desde Settings/Conectores dentro de la app en vez de editar el archivo a mano
+- [x] Conectar en Claude Desktop y probar 5 preguntas reales — conectado desde Settings/Conectores de la app (edición manual de `claude_desktop_config.json` no sirve, la app la sobrescribe); verificado que Claude.app levantó `node dist/index.js` como subproceso y respondió correctamente a preguntas reales
 
 ## Fase 4 — Calidad y CI (1 día)
 - [x] GitHub Actions: lint + test + build en cada push/PR

@@ -103,9 +103,9 @@ mcp-publisher publish
 ## Pendiente
 
 - [ ] Acceso SSH a la instancia OCI A1.
-- [ ] Acceso a la cuenta/zona de Cloudflare (o confirmar que ya existe `staging.acambaro.com.mx`
-      o similar para el subdominio del MCP).
-- [ ] Elegir Docker o systemd.
-- [ ] Ejecutar el despliegue y verificar con los comandos de arriba.
+- [ ] Acceso a la cuenta/zona de Cloudflare.
+- [x] Elegir Docker o systemd → decidido: **Docker** (Opción A de este documento).
+- [x] Confirmar el dominio final → **`mcp.acambaro.com.mx`**, ya reflejado en `server.json`.
+- [ ] Ejecutar el despliegue con Docker y verificar con los comandos de arriba.
 - [ ] Tag `v0.2.0` una vez verificado en producción.
-- [ ] (Opcional) Confirmar el dominio final en `server.json` y correr `mcp-publisher publish`.
+- [ ] (Opcional) Correr `mcp-publisher publish` una vez desplegado.

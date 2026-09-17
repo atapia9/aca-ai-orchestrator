@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/atapia9/mcp-directorio-acambaro/actions/workflows/ci.yml/badge.svg)](https://github.com/atapia9/mcp-directorio-acambaro/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Node](https://img.shields.io/badge/node-20%2B-339933?logo=node.js&logoColor=white)](package.json)
+[![Node](https://img.shields.io/badge/node-22.12%2B-339933?logo=node.js&logoColor=white)](package.json)
 [![Release](https://img.shields.io/github/v/release/atapia9/mcp-directorio-acambaro)](https://github.com/atapia9/mcp-directorio-acambaro/releases)
 
 > Servidor **Model Context Protocol** en TypeScript que permite a asistentes de IA buscar negocios locales de Acámbaro, Guanajuato, y generar un diagnóstico de presencia digital vinculado a los servicios de SDDA.

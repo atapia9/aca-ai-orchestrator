@@ -4,7 +4,7 @@
 
 ## 1. Stack
 
-- **Lenguaje:** TypeScript (Node.js 20+ LTS)
+- **Lenguaje:** TypeScript (Node.js 22.12+ LTS — requerido por `better-sqlite3` y `vitest` desde la Fase 5)
 - **SDK:** `@modelcontextprotocol/sdk` (oficial) + `zod` para validar entradas
 - **Datos:** JSON (MVP) → SQLite con `better-sqlite3` (v0.2)
 - **Pruebas:** `vitest`

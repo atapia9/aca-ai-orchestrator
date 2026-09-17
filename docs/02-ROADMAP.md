@@ -4,7 +4,7 @@
 
 ## Fase 0 — Preparación (1 día)
 - [x] Crear repo público `atapia9/mcp-directorio-acambaro` (MIT, `.gitignore` Node)
-- [x] Instalar Node 20+, Claude Desktop y Claude Code
+- [x] Instalar Node 20+, Claude Desktop y Claude Code (nota: desde la Fase 5, `better-sqlite3`/`vitest` requieren Node 22.12+)
 - [x] Copiar estos `.md` a `docs/` y `CLAUDE.md` a la raíz
 - [ ] Leer la documentación oficial: modelcontextprotocol.io (quickstart servidor TS)
 

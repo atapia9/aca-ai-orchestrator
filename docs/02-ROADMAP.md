@@ -36,7 +36,7 @@
 ## Fase 5 — Persistencia y despliegue (3 días)
 - [x] Migrar repositorio a SQLite (misma interfaz)
 - [x] `src/http.ts` con Streamable HTTP
-- [ ] Desplegar en instancia OCI A1 (systemd o Docker) tras Cloudflare, HTTPS
+- [ ] Desplegar en instancia OCI A1 (systemd o Docker) tras Cloudflare, HTTPS — preparado y validado localmente (simulación de "modo producción" con solo dependencias de producción, `deploy/cloudflared-config.example.yml`, `deploy/verificar.sh`); falta ejecutarlo en la instancia real, pendiente de acceso SSH/Cloudflare
 - [x] Token simple por header para limitar acceso
 - [ ] Tag `v0.2.0`
 

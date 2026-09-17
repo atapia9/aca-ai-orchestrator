@@ -4,6 +4,7 @@ After=network.target
 
 [Service]
 Type=simple
+Environment=NODE_ENV=production
 WorkingDirectory=/opt/mcp-directorio-acambaro
 EnvironmentFile=/opt/mcp-directorio-acambaro/.env
 ExecStart=/usr/bin/node dist/http.js

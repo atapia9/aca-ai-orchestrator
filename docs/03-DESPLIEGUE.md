@@ -6,6 +6,11 @@
 Este documento describe el plan; la ejecución contra el servidor real queda pendiente hasta
 tener acceso SSH a la instancia y a la cuenta de Cloudflare.
 
+**Ya validado localmente** (sin Docker ni OCI, simulando el paso de producción): el servidor
+arranca y responde correctamente usando *solo* dependencias de producción (`npm ci --omit=dev`
++ `dist/` ya compilado, igual que hace el Dockerfile y el unit de systemd), así que el único
+paso que falta es ejecutar esto en la instancia real.
+
 ## Variables de entorno requeridas
 
 | Variable | Descripción |
@@ -56,8 +61,11 @@ gestiona el certificado HTTPS.
 ```bash
 cloudflared tunnel create mcp-directorio-acambaro
 cloudflared tunnel route dns mcp-directorio-acambaro mcp.acambaro.com.mx  # o el subdominio elegido
-cloudflared tunnel run mcp-directorio-acambaro
+cloudflared tunnel --config ~/.cloudflared/config.yml run mcp-directorio-acambaro
 ```
+
+Plantilla de config en [`deploy/cloudflared-config.example.yml`](../deploy/cloudflared-config.example.yml)
+(copiarla a `~/.cloudflared/config.yml` y ajustar `credentials-file`/`hostname`).
 
 Alternativa: exponer el puerto en el Security List de OCI y usar Cloudflare como proxy DNS
 (nube naranja) hacia la IP pública, con "Full (strict)" y un certificado de origen de
@@ -66,13 +74,11 @@ Cloudflare en el servidor. Requiere abrir el puerto en el firewall de OCI.
 ## Verificación
 
 ```bash
-curl -s https://<tu-dominio>/salud
-curl -s -X POST https://<tu-dominio>/mcp \
-  -H "authorization: Bearer <tu-token>" \
-  -H "content-type: application/json" \
-  -H "accept: application/json, text/event-stream" \
-  -d '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2025-06-18","capabilities":{},"clientInfo":{"name":"curl","version":"0"}}}'
+deploy/verificar.sh https://<tu-dominio> <tu-token>
 ```
+
+Corre `GET /salud`, confirma que `POST /mcp` sin token da 401, y que con el token correcto
+responde el `initialize` de MCP. Ya se probó contra una instancia local (ver arriba).
 
 ## Pendiente
 

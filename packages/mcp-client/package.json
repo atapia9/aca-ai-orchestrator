@@ -1,0 +1,19 @@
+{
+  "name": "@acambaro/mcp-client",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Cliente tipado hacia el MCP del directorio de negocios de Acambaro (stdio).",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc --build",
+    "typecheck": "tsc --build --force",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.30.0",
+    "mcp-directorio-acambaro": "workspace:*",
+    "zod": "^4.6.5"
+  }
+}

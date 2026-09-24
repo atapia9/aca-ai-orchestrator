@@ -3,8 +3,8 @@
 ## MVP1 (en curso)
 
 1. ~~Fase 0 — Reconocimiento del MCP existente~~
-2. **Fase 1 — Esqueleto del monorepo** _(en curso)_
-3. Fase 2 — Integración del MCP Directorio
+2. ~~Fase 1 — Esqueleto del monorepo~~
+3. **Fase 2 — Integración del MCP Directorio** _(en curso)_
 4. Fase 3 — Core y agentes
 5. Fase 4 — Orquestador y CLI
 6. Fase 5 — Evals y demo

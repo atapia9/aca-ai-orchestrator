@@ -29,24 +29,43 @@ const RAIZ_PAQUETE = join(dirname(fileURLToPath(import.meta.url)), "..");
 const TAMANO_PAGINA = 100;
 const ENTIDAD_GUANAJUATO = "11";
 const MUNICIPIO_ACAMBARO = "002";
+const PAUSA_ENTRE_CONSULTAS_MS = 150;
+const INTENTOS_MAXIMOS = 3;
+
+function esperar(ms: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+class ErrorHttpDenue extends Error {
+  constructor(readonly status: number) {
+    super(`HTTP ${status}`);
+  }
+}
 
 /**
- * Un fallo de red (no de HTTP) es poco frecuente pero real en una corrida de
- * ~150 consultas seguidas ("fetch failed" visto en pruebas reales) - un
- * reintento con una pequeña pausa es más barato que perder esa clase SCIAN.
+ * Reintenta en dos casos vistos en corridas reales de ~150 consultas
+ * seguidas: fallo de red ("fetch failed") y HTTP 5xx (un tramo de una
+ * corrida real dio "HTTP 503" en cascada - probablemente DENUE limitando por
+ * volumen de consultas repetidas con el mismo token en poco tiempo, no un
+ * error nuestro). Un 4xx (ej. token inválido) no se reintenta: es
+ * determinista, reintentar no cambia el resultado.
  */
 async function consultarConReintento(url: string): Promise<unknown> {
-  try {
-    const respuesta = await fetch(url);
-    if (!respuesta.ok) throw new Error(`HTTP ${respuesta.status}`);
-    return await respuesta.json();
-  } catch (error) {
-    if (error instanceof Error && error.message.startsWith("HTTP ")) throw error;
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    const respuesta = await fetch(url);
-    if (!respuesta.ok) throw new Error(`HTTP ${respuesta.status}`, { cause: error });
-    return await respuesta.json();
+  let ultimoError: unknown;
+  for (let intento = 1; intento <= INTENTOS_MAXIMOS; intento++) {
+    try {
+      const respuesta = await fetch(url);
+      if (respuesta.ok) return await respuesta.json();
+      throw new ErrorHttpDenue(respuesta.status);
+    } catch (error) {
+      if (error instanceof ErrorHttpDenue && error.status < 500) throw error;
+      ultimoError = error;
+      if (intento < INTENTOS_MAXIMOS) await esperar(500 * intento);
+    }
   }
+  throw ultimoError instanceof Error
+    ? ultimoError
+    : new Error("Fallo desconocido consultando DENUE", { cause: ultimoError });
 }
 
 async function main(): Promise<void> {
@@ -89,6 +108,7 @@ async function main(): Promise<void> {
       let cuerpo: unknown;
       try {
         cuerpo = await consultarConReintento(url);
+        await esperar(PAUSA_ENTRE_CONSULTAS_MS);
       } catch (error) {
         console.error(
           `  ✗ ${claveScian}: ${error instanceof Error ? error.message : String(error)}`,

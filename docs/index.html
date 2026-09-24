@@ -1,0 +1,900 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Acámbaro AI Orchestrator</title>
+    <meta
+      name="description"
+      content="Orquestador multiagente que convierte los datos de un negocio local de Acámbaro, Gto., en un diagnóstico de presencia digital, una recomendación de servicio y contenido listo para revisión humana."
+    />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%232a78d6'/%3E%3C/svg%3E"
+    />
+    <style>
+      :root {
+        color-scheme: light;
+        --surface: #fcfcfb;
+        --plane: #f9f9f7;
+        --surface-raise: #ffffff;
+        --ink: #0b0b0b;
+        --ink-2: #52514e;
+        --ink-muted: #898781;
+        --line: #e1e0d9;
+        --border: rgba(11, 11, 11, 0.1);
+        --accent: #2a78d6;
+        --accent-wash: rgba(42, 120, 214, 0.08);
+        --good: #0ca30c;
+        --code-surface: #f3f2ee;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root:where(:not([data-theme="light"])) {
+          color-scheme: dark;
+          --surface: #1a1a19;
+          --plane: #0d0d0d;
+          --surface-raise: #232322;
+          --ink: #ffffff;
+          --ink-2: #c3c2b7;
+          --ink-muted: #898781;
+          --line: #2c2c2a;
+          --border: rgba(255, 255, 255, 0.1);
+          --accent: #3987e5;
+          --accent-wash: rgba(57, 135, 229, 0.12);
+          --good: #0ca30c;
+          --code-surface: #202020;
+        }
+      }
+      :root[data-theme="dark"] {
+        color-scheme: dark;
+        --surface: #1a1a19;
+        --plane: #0d0d0d;
+        --surface-raise: #232322;
+        --ink: #ffffff;
+        --ink-2: #c3c2b7;
+        --ink-muted: #898781;
+        --line: #2c2c2a;
+        --border: rgba(255, 255, 255, 0.1);
+        --accent: #3987e5;
+        --accent-wash: rgba(57, 135, 229, 0.12);
+        --good: #0ca30c;
+        --code-surface: #202020;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        background: var(--plane);
+        color: var(--ink);
+        font-family:
+          system-ui,
+          -apple-system,
+          "Segoe UI",
+          sans-serif;
+        line-height: 1.55;
+        -webkit-font-smoothing: antialiased;
+      }
+      a {
+        color: var(--accent);
+      }
+      .wrap {
+        max-width: 980px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      header.site {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        background: color-mix(in srgb, var(--plane) 88%, transparent);
+        backdrop-filter: blur(8px);
+        border-bottom: 1px solid var(--border);
+      }
+      header.site .wrap {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 60px;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 600;
+        text-decoration: none;
+        color: var(--ink);
+      }
+      .brand .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 3px;
+        background: var(--accent);
+        flex: none;
+      }
+      nav.site-nav {
+        display: flex;
+        align-items: center;
+        gap: 22px;
+      }
+      nav.site-nav a:not(.btn) {
+        color: var(--ink-2);
+        text-decoration: none;
+        font-size: 0.92rem;
+      }
+      nav.site-nav a:not(.btn):hover {
+        color: var(--ink);
+      }
+      @media (max-width: 640px) {
+        .brand {
+          font-size: 0.92rem;
+        }
+        nav.site-nav {
+          gap: 10px;
+        }
+        nav.site-nav a:not(.btn) {
+          display: none;
+        }
+        nav.site-nav .btn {
+          padding: 8px 12px;
+          font-size: 0.84rem;
+        }
+      }
+      .theme-toggle {
+        border: 1px solid var(--border);
+        background: var(--surface-raise);
+        color: var(--ink);
+        width: 34px;
+        height: 34px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 18px;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 0.92rem;
+        text-decoration: none;
+        border: 1px solid transparent;
+        cursor: pointer;
+      }
+      .btn-primary {
+        background: var(--accent);
+        color: #fff;
+      }
+      .btn-primary:hover {
+        opacity: 0.92;
+      }
+      .btn-ghost {
+        background: transparent;
+        color: var(--ink);
+        border-color: var(--border);
+      }
+      .btn-ghost:hover {
+        background: var(--accent-wash);
+      }
+
+      section {
+        padding: 64px 0;
+      }
+      section.tight {
+        padding: 40px 0;
+      }
+      h1,
+      h2,
+      h3 {
+        line-height: 1.2;
+        letter-spacing: -0.01em;
+      }
+      h2 {
+        font-size: 1.7rem;
+        margin: 0 0 8px;
+      }
+      .eyebrow {
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-size: 0.74rem;
+        font-weight: 700;
+        color: var(--accent);
+        margin: 0 0 10px;
+      }
+      .lede {
+        color: var(--ink-2);
+        max-width: 640px;
+        margin: 0 0 36px;
+        font-size: 1rem;
+      }
+
+      .hero {
+        padding: 84px 0 56px;
+        text-align: center;
+      }
+      .hero h1 {
+        font-size: clamp(2rem, 5vw, 2.9rem);
+        margin: 0 0 18px;
+      }
+      .hero .pitch {
+        max-width: 680px;
+        margin: 0 auto 30px;
+        color: var(--ink-2);
+        font-size: 1.08rem;
+      }
+      .hero .pitch strong {
+        color: var(--ink);
+        font-weight: 600;
+      }
+      .hero .cta-row {
+        display: flex;
+        gap: 12px;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-bottom: 14px;
+      }
+      .hero .attrib {
+        color: var(--ink-muted);
+        font-size: 0.86rem;
+      }
+      .hero .attrib a {
+        color: var(--ink-muted);
+        text-decoration: underline;
+      }
+
+      /* Pipeline */
+      .pipeline-row {
+        display: flex;
+        align-items: flex-start;
+        gap: 0;
+        flex-wrap: wrap;
+      }
+      .step {
+        flex: 1 1 140px;
+        min-width: 130px;
+        background: var(--surface-raise);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 18px 14px;
+        text-align: center;
+        position: relative;
+      }
+      .step .n {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: var(--accent-wash);
+        color: var(--accent);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 0.85rem;
+        margin: 0 auto 10px;
+      }
+      .step h3 {
+        font-size: 0.95rem;
+        margin: 0 0 6px;
+      }
+      .step p {
+        font-size: 0.78rem;
+        color: var(--ink-2);
+        margin: 0;
+      }
+      .arrow {
+        flex: 0 0 auto;
+        align-self: center;
+        color: var(--ink-muted);
+        font-size: 1.2rem;
+        padding: 0 6px;
+      }
+      .parallel-pair {
+        flex: 1 1 140px;
+        min-width: 130px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .parallel-pair .step {
+        flex: none;
+      }
+      .gate {
+        flex: 1 1 150px;
+        min-width: 140px;
+        border: 1px dashed var(--border);
+        border-radius: 12px;
+        padding: 18px 14px;
+        text-align: center;
+        color: var(--ink-2);
+        font-size: 0.82rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+      }
+      .gate .icon {
+        font-size: 1.1rem;
+      }
+      @media (max-width: 860px) {
+        .pipeline-row {
+          flex-direction: column;
+        }
+        .arrow {
+          transform: rotate(90deg);
+          padding: 4px 0;
+        }
+        .parallel-pair {
+          flex-direction: row;
+        }
+      }
+
+      /* Stat tiles */
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 14px;
+      }
+      @media (max-width: 760px) {
+        .stats-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      .stat {
+        background: var(--surface-raise);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 20px 16px;
+      }
+      .stat .value {
+        font-size: 1.9rem;
+        font-weight: 600;
+        letter-spacing: -0.02em;
+      }
+      .stat .label {
+        color: var(--ink-2);
+        font-size: 0.82rem;
+        margin-top: 4px;
+      }
+
+      /* Demo tabs */
+      .demo-panel {
+        background: var(--surface-raise);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        overflow: hidden;
+      }
+      .demo-head {
+        padding: 18px 20px 0;
+      }
+      .demo-head .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: var(--accent-wash);
+        color: var(--accent);
+        font-size: 0.74rem;
+        font-weight: 700;
+        padding: 4px 10px;
+        border-radius: 999px;
+        margin-bottom: 10px;
+      }
+      .tabs {
+        display: flex;
+        gap: 4px;
+        padding: 12px 20px 0;
+        overflow-x: auto;
+        border-bottom: 1px solid var(--line);
+      }
+      .tab {
+        background: none;
+        border: none;
+        color: var(--ink-2);
+        padding: 10px 14px;
+        font-size: 0.86rem;
+        font-weight: 600;
+        cursor: pointer;
+        border-bottom: 2px solid transparent;
+        white-space: nowrap;
+        font-family: inherit;
+      }
+      .tab:hover {
+        color: var(--ink);
+      }
+      .tab[aria-selected="true"] {
+        color: var(--accent);
+        border-bottom-color: var(--accent);
+      }
+      .tab-body {
+        padding: 24px 28px 30px;
+        min-height: 220px;
+      }
+      .tab-body :is(h1, h2, h3) {
+        font-size: 1.05rem;
+        margin: 1.2em 0 0.5em;
+      }
+      .tab-body :is(h1, h2, h3):first-child {
+        margin-top: 0;
+      }
+      .tab-body p,
+      .tab-body li {
+        color: var(--ink-2);
+        font-size: 0.94rem;
+      }
+      .tab-body strong {
+        color: var(--ink);
+      }
+      .tab-body ul,
+      .tab-body ol {
+        padding-left: 1.3em;
+      }
+      .tab-body code {
+        background: var(--code-surface);
+        padding: 1px 5px;
+        border-radius: 4px;
+        font-size: 0.85em;
+      }
+      .demo-foot {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 8px;
+        padding: 14px 20px;
+        border-top: 1px solid var(--line);
+        font-size: 0.8rem;
+        color: var(--ink-muted);
+      }
+      .loading {
+        color: var(--ink-muted);
+        font-size: 0.9rem;
+      }
+
+      .roadmap-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        gap: 10px;
+      }
+      .roadmap-list li {
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+        background: var(--surface-raise);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 14px 16px;
+        font-size: 0.9rem;
+        color: var(--ink-2);
+      }
+      .roadmap-list .status {
+        flex: none;
+        font-size: 1rem;
+        line-height: 1.5;
+      }
+      .roadmap-list .done .status {
+        color: var(--good);
+      }
+      .roadmap-list strong {
+        color: var(--ink);
+      }
+
+      footer.site {
+        border-top: 1px solid var(--border);
+        padding: 34px 0;
+        color: var(--ink-muted);
+        font-size: 0.84rem;
+      }
+      footer.site .wrap {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+      footer.site a {
+        color: var(--ink-muted);
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site">
+      <div class="wrap">
+        <a class="brand" href="#top">
+          <span class="dot"></span>
+          Acámbaro AI Orchestrator
+        </a>
+        <nav class="site-nav">
+          <a href="#pipeline">Cómo funciona</a>
+          <a href="#demo">Demo real</a>
+          <a href="#roadmap">Roadmap</a>
+          <a
+            class="btn btn-ghost"
+            href="https://github.com/atapia9/aca-ai-orchestrator"
+            target="_blank"
+            rel="noopener"
+            >GitHub</a
+          >
+          <button
+            class="theme-toggle"
+            id="themeToggle"
+            type="button"
+            aria-label="Cambiar tema"
+            title="Cambiar tema"
+          >
+            🌓
+          </button>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" id="top">
+        <div class="wrap">
+          <p class="eyebrow">SDDA · Servicios Digitales de Acámbaro</p>
+          <h1>Un comando, cinco agentes,<br />un diagnóstico completo.</h1>
+          <p class="pitch">
+            Convierte los datos de un negocio local de Acámbaro, Gto., en un
+            <strong>diagnóstico de presencia digital</strong>, una
+            <strong>recomendación de servicio</strong> y
+            <strong>contenido listo para revisión humana</strong> — con un tope de gasto verificado
+            antes de cada llamada al modelo, nunca después.
+          </p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="#demo">Ver una corrida real →</a>
+            <a
+              class="btn btn-ghost"
+              href="https://github.com/atapia9/aca-ai-orchestrator"
+              target="_blank"
+              rel="noopener"
+              >Código en GitHub</a
+            >
+          </div>
+          <p class="attrib">
+            Construido por
+            <a href="https://github.com/atapia9" target="_blank" rel="noopener">Armando Tapia</a>
+            para Acambaro.com.mx
+          </p>
+        </div>
+      </section>
+
+      <section id="pipeline">
+        <div class="wrap">
+          <p class="eyebrow">Arquitectura</p>
+          <h2>5 agentes, un solo comando</h2>
+          <p class="lede">
+            <code>pnpm orchestrate diagnostico --negocio "&lt;id-o-nombre&gt;"</code> — cada salida
+            se valida con zod antes de pasar al siguiente paso.
+          </p>
+          <div class="pipeline-row">
+            <div class="step">
+              <div class="n">1</div>
+              <h3>Investigador</h3>
+              <p>Trae la ficha del negocio (directorio MCP o captura manual).</p>
+            </div>
+            <div class="arrow">→</div>
+            <div class="step">
+              <div class="n">2</div>
+              <h3>Diagnóstico</h3>
+              <p>Puntaje 0-100 por dimensión, verificado vs. supuesto.</p>
+            </div>
+            <div class="arrow">→</div>
+            <div class="parallel-pair">
+              <div class="step">
+                <div class="n">3</div>
+                <h3>Estratega</h3>
+                <p>Recomienda un servicio de la escalera SDDA.</p>
+              </div>
+              <div class="step">
+                <div class="n">4</div>
+                <h3>Contenido</h3>
+                <p>3 publicaciones para redes sociales.</p>
+              </div>
+            </div>
+            <div class="arrow">→</div>
+            <div class="gate"><span class="icon">✋</span>Aprobación<br />humana</div>
+            <div class="arrow">→</div>
+            <div class="step">
+              <div class="n">5</div>
+              <h3>Propuesta</h3>
+              <p>Propuesta comercial en Markdown.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="tight">
+        <div class="wrap">
+          <div class="stats-grid" id="statsGrid">
+            <div class="stat">
+              <div class="value">175</div>
+              <div class="label">tests automatizados, todos pasando</div>
+            </div>
+            <div class="stat">
+              <div class="value">98%</div>
+              <div class="label">cobertura de statements</div>
+            </div>
+            <div class="stat">
+              <div class="value">$0.06</div>
+              <div class="label">costo real de la corrida de abajo (USD)</div>
+            </div>
+            <div class="stat">
+              <div class="value">4,300+</div>
+              <div class="label">negocios reales de Acámbaro vía DENUE (INEGI)</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="demo">
+        <div class="wrap">
+          <p class="eyebrow">Salida real, sin editar</p>
+          <h2>Una corrida <code>--live</code> completa</h2>
+          <p class="lede">
+            Negocio ficticio, API real de Anthropic. Esto es exactamente lo que el modelo generó —
+            solo pasó la validación de zod de cada agente, ningún dato se ajustó a mano.
+          </p>
+          <div class="demo-panel">
+            <div class="demo-head">
+              <span class="badge">🔧 Taller Mecánico El Tornillo Feliz (ficticio)</span>
+            </div>
+            <div class="tabs" role="tablist" id="tabs">
+              <button class="tab" role="tab" data-file="01-ficha.md" aria-selected="true">
+                1. Ficha
+              </button>
+              <button class="tab" role="tab" data-file="02-diagnostico.md">2. Diagnóstico</button>
+              <button class="tab" role="tab" data-file="03-recomendacion.md">
+                3. Recomendación
+              </button>
+              <button class="tab" role="tab" data-file="04-contenido.md">4. Contenido</button>
+              <button class="tab" role="tab" data-file="05-propuesta.md">5. Propuesta</button>
+            </div>
+            <div class="tab-body" id="tabBody"><p class="loading">Cargando…</p></div>
+            <div class="demo-foot">
+              <span>Duración real: <strong style="color: var(--ink)">41.6 s</strong></span>
+              <span>Modelo: <strong style="color: var(--ink)">claude-sonnet-5</strong></span>
+              <span>Tope configurado: $0.50 USD/corrida</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="roadmap">
+        <div class="wrap">
+          <p class="eyebrow">Estado del proyecto</p>
+          <h2>MVP1 completo, MVP2 en curso</h2>
+          <ul class="roadmap-list">
+            <li class="done">
+              <span class="status">✅</span
+              ><span
+                ><strong>MVP1 (Fases 0-5):</strong> orquestador, CLI, evals y demo — completo.</span
+              >
+            </li>
+            <li class="done">
+              <span class="status">✅</span
+              ><span
+                ><strong>Datos reales del directorio (DENUE):</strong>
+                <code>pnpm importar-denue</code> verificado contra la API real del INEGI.</span
+              >
+            </li>
+            <li>
+              <span class="status">🔜</span
+              ><span
+                ><strong>Branch protection</strong> sobre el check de CI en <code>main</code>.</span
+              >
+            </li>
+            <li>
+              <span class="status">🔜</span
+              ><span
+                ><strong>API HTTP + panel web</strong> para operar sin depender de la
+                terminal.</span
+              >
+            </li>
+            <li>
+              <span class="status">🔜</span
+              ><span
+                ><strong>Publicación directa</strong> a WhatsApp Business, Meta y Google Business
+                Profile.</span
+              >
+            </li>
+          </ul>
+          <p class="lede" style="margin-top: 20px">
+            Detalle completo en
+            <a
+              href="https://github.com/atapia9/aca-ai-orchestrator/blob/main/docs/ROADMAP.md"
+              target="_blank"
+              rel="noopener"
+              >docs/ROADMAP.md</a
+            >
+            y en el
+            <a
+              href="https://github.com/atapia9/aca-ai-orchestrator/blob/main/docs/CIERRE-MVP1.md"
+              target="_blank"
+              rel="noopener"
+              >informe de cierre del MVP1</a
+            >.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site">
+      <div class="wrap">
+        <span
+          >MIT License ·
+          <a href="https://github.com/atapia9/aca-ai-orchestrator" target="_blank" rel="noopener"
+            >atapia9/aca-ai-orchestrator</a
+          ></span
+        >
+        <span>SDDA — Servicios Digitales de Acámbaro</span>
+      </div>
+    </footer>
+
+    <script>
+      (function () {
+        "use strict";
+
+        // Markdown -> HTML, self-contained (no CDN dependency, which failed to
+        // resolve in a restricted-network test and would be an unnecessary
+        // point of failure for real visitors too). Covers exactly what the
+        // deliverable files use: #/##/### headings, **bold**, _italic_,
+        // `code`, unordered/ordered lists, paragraphs, and trailing-double-
+        // space hard line breaks.
+        function renderMarkdownToHtml(md) {
+          function inline(text) {
+            return text
+              .replace(/&/g, "&amp;")
+              .replace(/</g, "&lt;")
+              .replace(/>/g, "&gt;")
+              .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
+              .replace(/(^|[^_])_([^_]+)_(?!_)/g, "$1<em>$2</em>")
+              .replace(/`([^`]+)`/g, "<code>$1</code>")
+              .replace(/ {2}$/, "<br>");
+          }
+          var lines = md.replace(/\r\n/g, "\n").split("\n");
+          var out = [];
+          var i = 0;
+          var isHeading = function (l) {
+            return /^#{1,3}\s/.test(l);
+          };
+          var isUl = function (l) {
+            return /^-\s+/.test(l);
+          };
+          var isOl = function (l) {
+            return /^\d+\.\s+/.test(l);
+          };
+          while (i < lines.length) {
+            var line = lines[i];
+            var heading = /^(#{1,3})\s+(.*)$/.exec(line);
+            if (heading) {
+              out.push(
+                "<h" +
+                  heading[1].length +
+                  ">" +
+                  inline(heading[2]) +
+                  "</h" +
+                  heading[1].length +
+                  ">",
+              );
+              i++;
+              continue;
+            }
+            if (isUl(line)) {
+              var uitems = [];
+              while (i < lines.length && isUl(lines[i])) {
+                uitems.push("<li>" + inline(lines[i].replace(/^-\s+/, "")) + "</li>");
+                i++;
+              }
+              out.push("<ul>" + uitems.join("") + "</ul>");
+              continue;
+            }
+            if (isOl(line)) {
+              var oitems = [];
+              while (i < lines.length && isOl(lines[i])) {
+                oitems.push("<li>" + inline(lines[i].replace(/^\d+\.\s+/, "")) + "</li>");
+                i++;
+              }
+              out.push("<ol>" + oitems.join("") + "</ol>");
+              continue;
+            }
+            if (line.trim() === "") {
+              i++;
+              continue;
+            }
+            var para = [];
+            while (
+              i < lines.length &&
+              lines[i].trim() !== "" &&
+              !isHeading(lines[i]) &&
+              !isUl(lines[i]) &&
+              !isOl(lines[i])
+            ) {
+              para.push(inline(lines[i]));
+              i++;
+            }
+            out.push("<p>" + para.join(" ") + "</p>");
+          }
+          return out.join("\n");
+        }
+
+        // Theme toggle: persists in localStorage, falls back to OS preference.
+        var root = document.documentElement;
+        var toggle = document.getElementById("themeToggle");
+        function applyTheme(theme) {
+          if (theme === "light" || theme === "dark") root.setAttribute("data-theme", theme);
+          else root.removeAttribute("data-theme");
+        }
+        try {
+          applyTheme(localStorage.getItem("aca-theme"));
+        } catch (e) {
+          /* private mode / storage disabled: ignore, OS preference still applies */
+        }
+        toggle.addEventListener("click", function () {
+          var current = root.getAttribute("data-theme");
+          var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+          var effectiveDark = current ? current === "dark" : prefersDark;
+          var next = effectiveDark ? "light" : "dark";
+          applyTheme(next);
+          try {
+            localStorage.setItem("aca-theme", next);
+          } catch (e) {
+            /* ignore */
+          }
+        });
+
+        // Demo tabs: fetch the real deliverable markdown and render it client-side.
+        var DEMO_DIR = "demo/taller-mecanico-el-tornillo-feliz/";
+        var tabsEl = document.getElementById("tabs");
+        var bodyEl = document.getElementById("tabBody");
+        var cache = {};
+
+        function renderMarkdown(text) {
+          bodyEl.innerHTML = renderMarkdownToHtml(text);
+        }
+
+        function loadTab(file) {
+          bodyEl.innerHTML = '<p class="loading">Cargando…</p>';
+          if (cache[file]) {
+            renderMarkdown(cache[file]);
+            return;
+          }
+          fetch(DEMO_DIR + file)
+            .then(function (res) {
+              if (!res.ok) throw new Error("HTTP " + res.status);
+              return res.text();
+            })
+            .then(function (text) {
+              cache[file] = text;
+              renderMarkdown(text);
+            })
+            .catch(function () {
+              bodyEl.innerHTML =
+                '<p class="loading">No se pudo cargar este archivo aquí. Míralo directo en ' +
+                '<a href="https://github.com/atapia9/aca-ai-orchestrator/tree/main/docs/demo/taller-mecanico-el-tornillo-feliz" target="_blank" rel="noopener">GitHub</a>.</p>';
+            });
+        }
+
+        tabsEl.addEventListener("click", function (event) {
+          var btn = event.target.closest(".tab");
+          if (!btn) return;
+          Array.prototype.forEach.call(tabsEl.querySelectorAll(".tab"), function (t) {
+            t.setAttribute("aria-selected", String(t === btn));
+          });
+          loadTab(btn.dataset.file);
+        });
+
+        loadTab("01-ficha.md");
+      })();
+    </script>
+  </body>
+</html>

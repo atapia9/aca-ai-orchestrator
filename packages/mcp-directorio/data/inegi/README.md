@@ -84,9 +84,15 @@ Este catálogo es **solo clasificación**, no hay ningún negocio individual rea
 1. **API DENUE** (`inegi.org.mx/servicios/api_denue.html`): requiere un token gratuito que se obtiene registrando una cuenta en el sitio de INEGI — un paso que solo puede hacer una persona, no un asistente automatizado.
 2. **Descarga masiva**: la herramienta oficial de INEGI para descarga masiva por municipio es un ejecutable de Windows (`DescargaMasivaApp.exe`), no ejecutable desde este entorno.
 
+## Herramienta de importación (`scripts/importar-denue.ts`)
+
+`pnpm importar-denue` (con `DENUE_TOKEN` en el ambiente) consulta `BuscarAreaAct` del DENUE por cada clase SCIAN ya mapeada en `scian-comercio-servicios-acambaro.csv`, filtrando por el municipio de Acámbaro (entidad `11` = Guanajuato, municipio `002` = Acámbaro), normaliza los resultados contra `src/domain/denue.ts` y los escribe en `data/inegi/denue-candidatos.json` — un archivo de **staging**, marcado explícitamente como "sin revisar ni consentimiento". El script nunca toca `src/data/negocios.json`.
+
+**Verificado contra la API real** (2026-09-24, con token real de Armando, corrido desde su máquina porque este entorno de trabajo bloquea el acceso saliente a `inegi.org.mx` por política de red): **4316 candidatos** para Acámbaro, sin errores. El schema de `src/domain/denue.ts` — reconstruido de fuentes secundarias, sin poder leer la documentación oficial directamente — resultó correcto. Un hallazgo real de esa corrida: DENUE regresa el string `"No hay resultados. "` (no un arreglo vacío) cuando una clase SCIAN no tiene ningún negocio registrado en el área consultada; `scripts/importar-denue.ts` ya lo reconoce como "0 registros" en vez de tratarlo como error.
+
 ## Próximos pasos (cuando se retome)
 
-1. Registrar una cuenta en INEGI y obtener el token gratuito de la API DENUE.
-2. Con el token, consultar DENUE filtrando por el municipio de Acámbaro (clave de entidad 11 = Guanajuato) y, opcionalmente, por las claves SCIAN de este catálogo.
-3. Normalizar los campos que devuelve DENUE (nombre, calle, colonia, teléfono, correo, sitio web, coordenadas, estrato de personal) contra el tipo `Negocio` de `src/domain/tipos.ts`, y completar los campos que el MVP necesita y DENUE no trae (horario, WhatsApp, redes sociales, etiquetas) — probablemente vía contacto directo con cada negocio.
-4. Decidir explícitamente, y solo entonces, si algún registro real pasa a `src/data/negocios.json` — lo que implica actualizar la política de "datos ficticios" en `CLAUDE.md` y `docs/00-VISION-Y-ALCANCE.md`, y obtener el consentimiento del negocio antes de publicar sus datos de contacto.
+1. ~~Registrar una cuenta en INEGI y obtener el token gratuito de la API DENUE.~~
+2. ~~Correr `pnpm importar-denue` con el token real.~~ Hecho — `data/inegi/denue-candidatos.json` tiene 4316 candidatos (no versionado en git por su tamaño y porque son datos reales sin consentimiento; regenerable con `pnpm importar-denue`).
+3. Completar a mano, por negocio, los campos que `Negocio` (`src/domain/tipos.ts`) necesita y DENUE no trae (horario, WhatsApp, redes sociales, etiquetas) — probablemente vía contacto directo con cada negocio.
+4. Decidir explícitamente, y solo entonces, si algún candidato de `denue-candidatos.json` pasa a `src/data/negocios.json` — lo que implica actualizar la política de "datos ficticios" en `CLAUDE.md` y `docs/00-VISION-Y-ALCANCE.md`, y obtener el consentimiento del negocio antes de publicar sus datos de contacto.

@@ -91,6 +91,15 @@ describe("parsearMapaScianCategoria", () => {
     expect(mapa.get("311812")).toBe("panaderia");
   });
 
+  it("no deja un '\\r' pegado a la categoría cuando el CSV usa saltos de línea \\r\\n", () => {
+    const csv = [
+      "clave_scian,nombre_clase_scian,rama_cod,rama_nombre,subsector_cod,subsector_nombre,categoria_directorio",
+      "311812,Panificación tradicional,3118,x,311,x,panaderia",
+    ].join("\r\n");
+    const mapa = parsearMapaScianCategoria(csv);
+    expect(mapa.get("311812")).toBe("panaderia");
+  });
+
   it("respeta comas dentro de campos entre comillas", () => {
     const csv = [
       "clave_scian,nombre_clase_scian,rama_cod,rama_nombre,subsector_cod,subsector_nombre,categoria_directorio",

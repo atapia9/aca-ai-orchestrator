@@ -150,7 +150,9 @@ function parsearFilaCsv(fila: string): string[] {
  */
 export function parsearMapaScianCategoria(csv: string): Map<string, string> {
   const mapa = new Map<string, string>();
-  const [, ...filas] = csv.trim().split("\n");
+  // El CSV real tiene saltos de línea \r\n (Windows); dividir solo por "\n"
+  // deja un "\r" pegado a la última columna de cada fila.
+  const [, ...filas] = csv.trim().split(/\r?\n/);
   for (const fila of filas) {
     if (!fila.trim()) continue;
     const columnas = parsearFilaCsv(fila);

@@ -7,3 +7,7 @@ coverage/
 *.log
 .DS_Store
 output/
+
+# Datos reales de negocios (PII: nombre, dirección, teléfono) sin consentimiento -
+# nunca se comitean. Ver packages/mcp-directorio/data/inegi/README.md.
+packages/mcp-directorio/data/inegi/denue-candidatos.json

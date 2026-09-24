@@ -86,18 +86,13 @@ Este catálogo es **solo clasificación**, no hay ningún negocio individual rea
 
 ## Herramienta de importación (`scripts/importar-denue.ts`)
 
-Ya existe el código para los pasos 2-3 de abajo: `pnpm importar-denue` (con `DENUE_TOKEN` en el ambiente) consulta `BuscarAreaAct` del DENUE por cada clase SCIAN ya mapeada en `scian-comercio-servicios-acambaro.csv`, filtrando por el municipio de Acámbaro (entidad `11` = Guanajuato, municipio `002` = Acámbaro), normaliza los resultados contra `src/domain/denue.ts` y los escribe en `data/inegi/denue-candidatos.json` — un archivo de **staging**, marcado explícitamente como "sin revisar ni consentimiento". El script nunca toca `src/data/negocios.json`.
+`pnpm importar-denue` (con `DENUE_TOKEN` en el ambiente) consulta `BuscarAreaAct` del DENUE por cada clase SCIAN ya mapeada en `scian-comercio-servicios-acambaro.csv`, filtrando por el municipio de Acámbaro (entidad `11` = Guanajuato, municipio `002` = Acámbaro), normaliza los resultados contra `src/domain/denue.ts` y los escribe en `data/inegi/denue-candidatos.json` — un archivo de **staging**, marcado explícitamente como "sin revisar ni consentimiento". El script nunca toca `src/data/negocios.json`.
 
-**Sin verificar contra la API real todavía**, por dos motivos:
-
-1. **Token**: la API requiere uno gratuito, registrando una cuenta en el sitio de INEGI — un paso que solo puede hacer una persona.
-2. **Red**: este entorno de trabajo (sandbox de Claude Code) bloquea el acceso saliente a `inegi.org.mx` por política de red. **Corrección:** una corrida anterior de este script pareció recibir un 403 "real" de la API con un token de prueba, pero el cuerpo de esa respuesta en realidad decía `Host not in allowlist: www.inegi.org.mx` — es el proxy de egreso de este entorno bloqueando la petición y devolviendo un 403 sintético, no la API de INEGI. No hay forma de distinguir "token inválido" de "red bloqueada" desde aquí hasta que se agregue `inegi.org.mx` a los dominios permitidos del entorno (configuración de red del entorno en el menú del entorno en la barra de título de la sesión), o el script se corra desde una máquina con acceso.
-
-El schema de `src/domain/denue.ts` (nombres de campo, estructura del endpoint `BuscarAreaAct`) se armó reconstruyendo la documentación oficial a partir de fuentes secundarias (resultados de búsqueda, bibliotecas de terceros), no leyéndola directamente. Es razonablemente confiable pero **no está confirmado contra una respuesta real** — la primera corrida real puede revelar que algún nombre de campo no calza; el schema está escrito para fallar fuerte (zod) en ese caso en vez de producir candidatos con datos corruptos en silencio.
+**Verificado contra la API real** (2026-09-24, con token real de Armando, corrido desde su máquina porque este entorno de trabajo bloquea el acceso saliente a `inegi.org.mx` por política de red): **4316 candidatos** para Acámbaro, sin errores. El schema de `src/domain/denue.ts` — reconstruido de fuentes secundarias, sin poder leer la documentación oficial directamente — resultó correcto. Un hallazgo real de esa corrida: DENUE regresa el string `"No hay resultados. "` (no un arreglo vacío) cuando una clase SCIAN no tiene ningún negocio registrado en el área consultada; `scripts/importar-denue.ts` ya lo reconoce como "0 registros" en vez de tratarlo como error.
 
 ## Próximos pasos (cuando se retome)
 
-1. Registrar una cuenta en INEGI y obtener el token gratuito de la API DENUE.
-2. Correr `pnpm importar-denue` con el token real y corregir `src/domain/denue.ts` si algún campo de la respuesta no calza con lo documentado arriba.
-3. Ya normalizado por `normalizarRegistroDenue`; sigue pendiente completar a mano, por negocio, los campos que `Negocio` (`src/domain/tipos.ts`) necesita y DENUE no trae (horario, WhatsApp, redes sociales, etiquetas) — probablemente vía contacto directo con cada negocio.
+1. ~~Registrar una cuenta en INEGI y obtener el token gratuito de la API DENUE.~~
+2. ~~Correr `pnpm importar-denue` con el token real.~~ Hecho — `data/inegi/denue-candidatos.json` tiene 4316 candidatos (no versionado en git por su tamaño y porque son datos reales sin consentimiento; regenerable con `pnpm importar-denue`).
+3. Completar a mano, por negocio, los campos que `Negocio` (`src/domain/tipos.ts`) necesita y DENUE no trae (horario, WhatsApp, redes sociales, etiquetas) — probablemente vía contacto directo con cada negocio.
 4. Decidir explícitamente, y solo entonces, si algún candidato de `denue-candidatos.json` pasa a `src/data/negocios.json` — lo que implica actualizar la política de "datos ficticios" en `CLAUDE.md` y `docs/00-VISION-Y-ALCANCE.md`, y obtener el consentimiento del negocio antes de publicar sus datos de contacto.

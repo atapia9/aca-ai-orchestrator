@@ -1,0 +1,23 @@
+{
+  "name": "@acambaro/cli",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "CLI del orquestador: comando `orchestrate diagnostico`.",
+  "main": "dist/index.js",
+  "bin": {
+    "orchestrate": "dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc --build",
+    "typecheck": "tsc --build --force",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@acambaro/agents": "workspace:*",
+    "@acambaro/core": "workspace:*",
+    "@acambaro/mcp-client": "workspace:*",
+    "@acambaro/orchestrator": "workspace:*",
+    "dotenv": "^18.0.3"
+  }
+}

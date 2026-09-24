@@ -1,0 +1,27 @@
+{
+  "id": "consultorio-dental-sonrisas-acambaro",
+  "nombre": "Consultorio Dental Sonrisas Acámbaro",
+  "categoria": "consultorio_dental",
+  "descripcion": "Consultorio de odontología general y estética: limpiezas, resinas, blanqueamiento y ortodoncia, con atención de lunes a sábado.",
+  "direccion": "Av. Guadalupe Victoria 210",
+  "colonia": "Centro",
+  "telefono": "417-555-0177",
+  "whatsapp": "+52 417 555 0177",
+  "sitio_web": "https://www.sonrisasacambaro.example.com",
+  "redes": {
+    "facebook": "https://facebook.com/sonrisasacambaro.ficticio",
+    "instagram": "https://instagram.com/sonrisasacambaro_ficticio",
+    "google_maps": "https://maps.google.com/?q=Sonrisas+Acambaro+ficticio"
+  },
+  "horario": {
+    "lun": ["10:00-19:00"],
+    "mar": ["10:00-19:00"],
+    "mie": ["10:00-19:00"],
+    "jue": ["10:00-19:00"],
+    "vie": ["10:00-19:00"],
+    "sab": ["10:00-14:00"]
+  },
+  "etiquetas": ["dentista", "odontologia", "salud"],
+  "actualizado": "2026-09-20",
+  "ficticio": true
+}

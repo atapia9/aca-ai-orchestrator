@@ -1,0 +1,23 @@
+# Solo el precio del Taller está confirmado; el resto son hipótesis en validación.
+servicios:
+  - id: diagnostico-expres
+    nombre: Diagnóstico exprés
+    precio_mxn: 0
+    estado: hipotesis
+  - id: mapa-oportunidades
+    nombre: Mapa de Oportunidades
+    precio_mxn: 4900
+    estado: hipotesis
+  - id: taller-operacion-digital
+    nombre: Taller Operación Digital Productiva
+    precio_mxn: 9999
+    estado: confirmado
+  - id: sprint-operacion
+    nombre: Sprint de Operación
+    precio_mxn: 24900
+    estado: hipotesis
+  - id: programa-acompanamiento
+    nombre: Programa de Acompañamiento
+    precio_mxn: 18900
+    periodicidad: mensual
+    estado: hipotesis

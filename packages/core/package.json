@@ -1,0 +1,21 @@
+{
+  "name": "@acambaro/core",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Tipos de dominio, configuracion, LLMProvider, logger y errores compartidos del orquestador.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc --build",
+    "typecheck": "tsc --build --force",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.128.0",
+    "pino": "^10.3.1",
+    "yaml": "^2.9.1",
+    "zod": "^4.6.5"
+  }
+}

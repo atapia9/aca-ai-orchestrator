@@ -1,0 +1,21 @@
+{
+  "id": "taller-mecanico-ejemplo",
+  "nombre": "Taller Mecánico El Tornillo Feliz (ejemplo)",
+  "categoria": "taller_mecanico",
+  "descripcion": "Taller de mecánica automotriz general: afinaciones, frenos y diagnóstico, en el centro de Acámbaro.",
+  "direccion": "Calle Ejemplo 123",
+  "colonia": "Centro",
+  "telefono": "417-555-0199",
+  "whatsapp": "+52 417 555 0199",
+  "horario": {
+    "lun": ["09:00-18:00"],
+    "mar": ["09:00-18:00"],
+    "mie": ["09:00-18:00"],
+    "jue": ["09:00-18:00"],
+    "vie": ["09:00-18:00"],
+    "sab": ["09:00-14:00"]
+  },
+  "etiquetas": ["mecanico", "automotriz", "frenos"],
+  "actualizado": "2026-09-24",
+  "ficticio": true
+}

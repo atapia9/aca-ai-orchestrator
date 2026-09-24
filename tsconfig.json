@@ -1,0 +1,21 @@
+{
+  // Cubre los scripts de configuracion sueltos de la raiz (este archivo no lo
+  // referencia nadie, por eso composite:false + noEmit). Cada paquete trae su
+  // propio tsconfig composite y se agrega a "references" conforme se crea
+  // (Fases 2-4), convirtiendo esto en un solution file de verdad.
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "composite": false,
+    "noEmit": true
+  },
+  "include": ["*.ts"],
+  "references": [
+    { "path": "packages/mcp-directorio" },
+    { "path": "packages/mcp-client" },
+    { "path": "packages/core" },
+    { "path": "packages/agents" },
+    { "path": "packages/orchestrator" },
+    { "path": "packages/evals" },
+    { "path": "apps/cli" }
+  ]
+}

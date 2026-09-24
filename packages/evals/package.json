@@ -1,0 +1,18 @@
+{
+  "name": "@acambaro/evals",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Casos de evaluacion de los agentes: 3 negocios ficticios, criterios verificables, modo mock y --live.",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc --build",
+    "typecheck": "tsc --build --force",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@acambaro/core": "workspace:*",
+    "@acambaro/orchestrator": "workspace:*",
+    "dotenv": "^18.0.3"
+  }
+}

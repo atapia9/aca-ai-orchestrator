@@ -1,0 +1,15 @@
+# Copia esto a ~/.cloudflared/config.yml en la instancia OCI (o a la ruta que
+# indique `cloudflared tunnel create`), y ajusta tunnel/credentials-file/hostname.
+#
+# Uso:
+#   cloudflared tunnel create mcp-directorio-acambaro
+#   cloudflared tunnel route dns mcp-directorio-acambaro mcp.acambaro.com.mx
+#   cloudflared tunnel --config ~/.cloudflared/config.yml run
+
+tunnel: mcp-directorio-acambaro
+credentials-file: /home/ubuntu/.cloudflared/<TUNNEL-ID>.json
+
+ingress:
+  - hostname: mcp.acambaro.com.mx
+    service: http://localhost:3000
+  - service: http_status:404

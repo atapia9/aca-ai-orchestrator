@@ -1,0 +1,505 @@
+[
+  {
+    "id": "cafe-la-parroquia",
+    "nombre": "Café La Parroquia",
+    "categoria": "cafeteria",
+    "descripcion": "Cafetería de barrio con pan dulce recién horneado y espacio para trabajar con wifi.",
+    "direccion": "Portal Hidalgo 12",
+    "colonia": "Centro",
+    "telefono": "417-555-0101",
+    "whatsapp": "+52 417 555 0101",
+    "sitio_web": "https://www.cafelaparroquia.example.com",
+    "redes": {
+      "facebook": "https://facebook.com/cafelaparroquia.ficticio",
+      "instagram": "https://instagram.com/cafelaparroquia_ficticio",
+      "google_maps": "https://maps.google.com/?q=Cafe+La+Parroquia+Acambaro+ficticio"
+    },
+    "horario": {
+      "lun": ["08:00-14:00", "16:00-21:00"],
+      "mar": ["08:00-14:00", "16:00-21:00"],
+      "mie": ["08:00-14:00", "16:00-21:00"],
+      "jue": ["08:00-14:00", "16:00-21:00"],
+      "vie": ["08:00-14:00", "16:00-21:00"],
+      "sab": ["08:00-14:00", "16:00-21:00"],
+      "dom": ["09:00-13:00"]
+    },
+    "etiquetas": ["cafe", "desayunos", "wifi"],
+    "actualizado": "2026-01-12"
+  },
+  {
+    "id": "aroma-de-acambaro",
+    "nombre": "Cafetería Aroma de Acámbaro",
+    "categoria": "cafeteria",
+    "descripcion": "Especialistas en café de olla y postres tradicionales guanajuatenses.",
+    "direccion": "Calle Morelos 45",
+    "colonia": "San Nicolás",
+    "telefono": "417-555-0102",
+    "redes": {
+      "facebook": "https://facebook.com/aromadeacambaro.ficticio"
+    },
+    "horario": {
+      "lun": [],
+      "mar": ["08:30-20:00"],
+      "mie": ["08:30-20:00"],
+      "jue": ["08:30-20:00"],
+      "vie": ["08:30-20:00"],
+      "sab": ["08:30-20:00"],
+      "dom": ["08:30-20:00"]
+    },
+    "etiquetas": ["cafe", "postres"],
+    "actualizado": "2025-11-03"
+  },
+  {
+    "id": "el-fogon-acambarense",
+    "nombre": "Restaurante El Fogón Acambarense",
+    "categoria": "restaurante",
+    "descripcion": "Cocina tradicional mexicana con carnitas, birria y comida corrida.",
+    "direccion": "Av. Independencia 88",
+    "colonia": "Centro",
+    "telefono": "417-555-0103",
+    "whatsapp": "+52 417 555 0103",
+    "sitio_web": "https://www.elfogonacambarense.example.com",
+    "redes": {
+      "facebook": "https://facebook.com/elfogonacambarense.ficticio",
+      "instagram": "https://instagram.com/elfogonacambarense_ficticio",
+      "google_maps": "https://maps.google.com/?q=El+Fogon+Acambarense+Acambaro+ficticio"
+    },
+    "horario": {
+      "lun": ["09:00-18:00"],
+      "mar": ["09:00-18:00"],
+      "mie": ["09:00-18:00"],
+      "jue": ["09:00-18:00"],
+      "vie": ["09:00-18:00"],
+      "sab": ["09:00-18:00"],
+      "dom": ["09:00-18:00"]
+    },
+    "etiquetas": ["comida mexicana", "carnitas", "comida corrida"],
+    "actualizado": "2026-02-20"
+  },
+  {
+    "id": "cocina-dona-licha",
+    "nombre": "Cocina Doña Licha",
+    "categoria": "restaurante",
+    "descripcion": "Fonda familiar con menú del día y sopes hechos a mano.",
+    "direccion": "Calle Zaragoza 21",
+    "colonia": "La Soledad",
+    "whatsapp": "+52 417 555 0104",
+    "horario": {
+      "lun": ["08:00-16:00"],
+      "mar": ["08:00-16:00"],
+      "mie": ["08:00-16:00"],
+      "jue": ["08:00-16:00"],
+      "vie": ["08:00-16:00"],
+      "sab": ["08:00-16:00"],
+      "dom": []
+    },
+    "etiquetas": ["fonda", "menu del dia"],
+    "actualizado": "2025-08-15"
+  },
+  {
+    "id": "pizzeria-toscana-acambaro",
+    "nombre": "Pizzería Toscana Acámbaro",
+    "categoria": "pizzeria",
+    "descripcion": "Pizzas al horno de leña con ingredientes locales.",
+    "direccion": "Blvd. García de León 150",
+    "colonia": "Vista Hermosa",
+    "telefono": "417-555-0105",
+    "whatsapp": "+52 417 555 0105",
+    "sitio_web": "https://www.pizzeriatoscana.example.com",
+    "redes": {
+      "instagram": "https://instagram.com/pizzeriatoscana_ficticio",
+      "google_maps": "https://maps.google.com/?q=Pizzeria+Toscana+Acambaro+ficticio"
+    },
+    "horario": {
+      "lun": [],
+      "mar": ["14:00-22:00"],
+      "mie": ["14:00-22:00"],
+      "jue": ["14:00-22:00"],
+      "vie": ["14:00-22:00"],
+      "sab": ["14:00-22:00"],
+      "dom": ["14:00-22:00"]
+    },
+    "etiquetas": ["pizza", "horno de leña", "cena"],
+    "actualizado": "2026-03-01"
+  },
+  {
+    "id": "panaderia-los-girasoles",
+    "nombre": "Panadería Los Girasoles",
+    "categoria": "panaderia",
+    "descripcion": "Pan de dulce y conchas recién horneadas desde temprano.",
+    "direccion": "Calle Guerrero 5",
+    "colonia": "Obrera",
+    "telefono": "417-555-0106",
+    "redes": {
+      "facebook": "https://facebook.com/panaderialosgirasoles.ficticio"
+    },
+    "horario": {
+      "lun": ["06:30-14:00"],
+      "mar": ["06:30-14:00"],
+      "mie": ["06:30-14:00"],
+      "jue": ["06:30-14:00"],
+      "vie": ["06:30-14:00"],
+      "sab": ["06:30-14:00"],
+      "dom": ["06:30-14:00"]
+    },
+    "etiquetas": ["panaderia", "pan dulce"],
+    "actualizado": "2025-06-30"
+  },
+  {
+    "id": "panificadora-san-miguel",
+    "nombre": "Panificadora San Miguel",
+    "categoria": "panaderia",
+    "descripcion": "Pastelería y panadería para fiestas y pedidos especiales.",
+    "direccion": "Calle Hidalgo 200",
+    "colonia": "El Refugio",
+    "telefono": "417-555-0107",
+    "whatsapp": "+52 417 555 0107",
+    "sitio_web": "https://www.panificadorasanmiguel.example.com",
+    "redes": {
+      "facebook": "https://facebook.com/panificadorasanmiguel.ficticio",
+      "instagram": "https://instagram.com/panificadorasanmiguel_ficticio",
+      "google_maps": "https://maps.google.com/?q=Panificadora+San+Miguel+Acambaro+ficticio"
+    },
+    "horario": {
+      "lun": ["07:00-20:00"],
+      "mar": ["07:00-20:00"],
+      "mie": ["07:00-20:00"],
+      "jue": ["07:00-20:00"],
+      "vie": ["07:00-20:00"],
+      "sab": ["07:00-20:00"],
+      "dom": ["08:00-14:00"]
+    },
+    "etiquetas": ["pasteles", "panaderia", "pedidos"],
+    "actualizado": "2026-04-18"
+  },
+  {
+    "id": "ferreteria-el-tornillo-feliz",
+    "nombre": "Ferretería El Tornillo Feliz",
+    "categoria": "ferreteria",
+    "descripcion": "Materiales de construcción, herramientas y tornillería a granel.",
+    "direccion": "Av. Revolución 300",
+    "colonia": "Centro",
+    "telefono": "417-555-0108",
+    "horario": {
+      "lun": ["08:00-19:00"],
+      "mar": ["08:00-19:00"],
+      "mie": ["08:00-19:00"],
+      "jue": ["08:00-19:00"],
+      "vie": ["08:00-19:00"],
+      "sab": ["08:00-19:00"],
+      "dom": []
+    },
+    "etiquetas": ["ferreteria", "construccion", "herramientas"],
+    "actualizado": "2025-05-10"
+  },
+  {
+    "id": "ferreteria-la-union",
+    "nombre": "Ferretería La Unión",
+    "categoria": "ferreteria",
+    "descripcion": "Más de 20 años surtiendo materiales eléctricos y de plomería.",
+    "direccion": "Calle Juárez 77",
+    "colonia": "La Cruz",
+    "telefono": "417-555-0109",
+    "whatsapp": "+52 417 555 0109",
+    "redes": {
+      "facebook": "https://facebook.com/ferreterialaunion.ficticio",
+      "google_maps": "https://maps.google.com/?q=Ferreteria+La+Union+Acambaro+ficticio"
+    },
+    "horario": {
+      "lun": ["08:30-18:30"],
+      "mar": ["08:30-18:30"],
+      "mie": ["08:30-18:30"],
+      "jue": ["08:30-18:30"],
+      "vie": ["08:30-18:30"],
+      "sab": ["08:30-18:30"],
+      "dom": []
+    },
+    "etiquetas": ["ferreteria", "electricidad", "plomeria"],
+    "actualizado": "2025-12-01"
+  },
+  {
+    "id": "farmacia-san-rafael",
+    "nombre": "Farmacia San Rafael",
+    "categoria": "farmacia",
+    "descripcion": "Medicamentos genéricos y de patente, con consulta médica de bajo costo.",
+    "direccion": "Portal Hidalgo 40",
+    "colonia": "Centro",
+    "telefono": "417-555-0110",
+    "whatsapp": "+52 417 555 0110",
+    "sitio_web": "https://www.farmaciasanrafael.example.com",
+    "redes": {
+      "facebook": "https://facebook.com/farmaciasanrafael.ficticio",
+      "google_maps": "https://maps.google.com/?q=Farmacia+San+Rafael+Acambaro+ficticio"
+    },
+    "horario": {
+      "lun": ["07:00-23:00"],
+      "mar": ["07:00-23:00"],
+      "mie": ["07:00-23:00"],
+      "jue": ["07:00-23:00"],
+      "vie": ["07:00-23:00"],
+      "sab": ["07:00-23:00"],
+      "dom": ["07:00-23:00"]
+    },
+    "etiquetas": ["farmacia", "consulta medica"],
+    "actualizado": "2026-01-30"
+  },
+  {
+    "id": "farmacia-plenitud",
+    "nombre": "Farmacia Plenitud",
+    "categoria": "farmacia",
+    "descripcion": "Farmacia de barrio con servicio a domicilio.",
+    "direccion": "Calle Allende 60",
+    "colonia": "San Nicolás",
+    "telefono": "417-555-0111",
+    "whatsapp": "+52 417 555 0111",
+    "horario": {
+      "lun": ["08:00-21:00"],
+      "mar": ["08:00-21:00"],
+      "mie": ["08:00-21:00"],
+      "jue": ["08:00-21:00"],
+      "vie": ["08:00-21:00"],
+      "sab": ["08:00-21:00"],
+      "dom": ["09:00-14:00"]
+    },
+    "etiquetas": ["farmacia", "domicilio"],
+    "actualizado": "2025-09-22"
+  },
+  {
+    "id": "taller-hermanos-ramirez",
+    "nombre": "Taller Mecánico Hermanos Ramírez",
+    "categoria": "taller_mecanico",
+    "descripcion": "Afinación, frenos y diagnóstico computarizado para autos y camionetas.",
+    "direccion": "Calle Industria 15",
+    "colonia": "Obrera",
+    "telefono": "417-555-0112",
+    "whatsapp": "+52 417 555 0112",
+    "redes": {
+      "facebook": "https://facebook.com/tallerhermanosramirez.ficticio"
+    },
+    "horario": {
+      "lun": ["09:00-18:00"],
+      "mar": ["09:00-18:00"],
+      "mie": ["09:00-18:00"],
+      "jue": ["09:00-18:00"],
+      "vie": ["09:00-18:00"],
+      "sab": ["09:00-18:00"],
+      "dom": []
+    },
+    "etiquetas": ["taller", "mecanica", "frenos"],
+    "actualizado": "2025-07-14"
+  },
+  {
+    "id": "taller-automotriz-acambaro",
+    "nombre": "Taller Automotriz Acámbaro",
+    "categoria": "taller_mecanico",
+    "descripcion": "Servicio integral automotriz con garantía por escrito.",
+    "direccion": "Blvd. García de León 210",
+    "colonia": "Vista Hermosa",
+    "telefono": "417-555-0113",
+    "whatsapp": "+52 417 555 0113",
+    "sitio_web": "https://www.tallerautomotrizacambaro.example.com",
+    "redes": {
+      "facebook": "https://facebook.com/tallerautomotrizacambaro.ficticio",
+      "instagram": "https://instagram.com/tallerautomotrizacambaro_ficticio",
+      "google_maps": "https://maps.google.com/?q=Taller+Automotriz+Acambaro+ficticio"
+    },
+    "horario": {
+      "lun": ["08:30-19:00"],
+      "mar": ["08:30-19:00"],
+      "mie": ["08:30-19:00"],
+      "jue": ["08:30-19:00"],
+      "vie": ["08:30-19:00"],
+      "sab": ["08:30-19:00"],
+      "dom": []
+    },
+    "etiquetas": ["taller", "mecanica", "garantia"],
+    "actualizado": "2026-02-05"
+  },
+  {
+    "id": "boutique-elegancia",
+    "nombre": "Boutique Elegancia",
+    "categoria": "tienda_ropa",
+    "descripcion": "Ropa de dama y accesorios de temporada.",
+    "direccion": "Portal Hidalgo 55",
+    "colonia": "Centro",
+    "telefono": "417-555-0114",
+    "whatsapp": "+52 417 555 0114",
+    "redes": {
+      "instagram": "https://instagram.com/boutiqueelegancia_ficticio"
+    },
+    "horario": {
+      "lun": ["10:00-20:00"],
+      "mar": ["10:00-20:00"],
+      "mie": ["10:00-20:00"],
+      "jue": ["10:00-20:00"],
+      "vie": ["10:00-20:00"],
+      "sab": ["10:00-20:00"],
+      "dom": ["11:00-15:00"]
+    },
+    "etiquetas": ["ropa", "moda", "dama"],
+    "actualizado": "2025-10-08"
+  },
+  {
+    "id": "moda-joven-acambaro",
+    "nombre": "Moda Joven Acámbaro",
+    "categoria": "tienda_ropa",
+    "descripcion": "Ropa casual y deportiva para jóvenes, con tallas extendidas.",
+    "direccion": "Calle Zaragoza 90",
+    "colonia": "La Soledad",
+    "horario": {
+      "lun": ["11:00-19:00"],
+      "mar": ["11:00-19:00"],
+      "mie": ["11:00-19:00"],
+      "jue": ["11:00-19:00"],
+      "vie": ["11:00-19:00"],
+      "sab": ["11:00-19:00"],
+      "dom": []
+    },
+    "etiquetas": ["ropa", "moda", "jovenes"],
+    "actualizado": "2025-03-19"
+  },
+  {
+    "id": "papeleria-escolar-acambaro",
+    "nombre": "Papelería Escolar Acámbaro",
+    "categoria": "papeleria",
+    "descripcion": "Útiles escolares, copias e impresiones, y uniformes básicos.",
+    "direccion": "Calle Morelos 10",
+    "colonia": "Centro",
+    "telefono": "417-555-0116",
+    "whatsapp": "+52 417 555 0116",
+    "redes": {
+      "facebook": "https://facebook.com/papeleriaescolaracambaro.ficticio"
+    },
+    "horario": {
+      "lun": ["08:00-20:00"],
+      "mar": ["08:00-20:00"],
+      "mie": ["08:00-20:00"],
+      "jue": ["08:00-20:00"],
+      "vie": ["08:00-20:00"],
+      "sab": ["08:00-20:00"],
+      "dom": ["10:00-14:00"]
+    },
+    "etiquetas": ["papeleria", "copias", "escolar"],
+    "actualizado": "2025-08-27"
+  },
+  {
+    "id": "papeleria-y-regalos-monarca",
+    "nombre": "Papelería y Regalos Monarca",
+    "categoria": "papeleria",
+    "descripcion": "Artículos de oficina, regalos y globos para fiestas.",
+    "direccion": "Calle Hidalgo 33",
+    "colonia": "El Refugio",
+    "telefono": "417-555-0117",
+    "sitio_web": "https://www.papeleriamonarca.example.com",
+    "redes": {
+      "facebook": "https://facebook.com/papeleriamonarca.ficticio",
+      "google_maps": "https://maps.google.com/?q=Papeleria+Monarca+Acambaro+ficticio"
+    },
+    "horario": {
+      "lun": ["09:00-19:30"],
+      "mar": ["09:00-19:30"],
+      "mie": ["09:00-19:30"],
+      "jue": ["09:00-19:30"],
+      "vie": ["09:00-19:30"],
+      "sab": ["09:00-19:30"],
+      "dom": []
+    },
+    "etiquetas": ["papeleria", "regalos", "fiestas"],
+    "actualizado": "2026-01-05"
+  },
+  {
+    "id": "veterinaria-patitas-felices",
+    "nombre": "Veterinaria Patitas Felices",
+    "categoria": "veterinaria",
+    "descripcion": "Consulta, vacunación y estética para perros y gatos.",
+    "direccion": "Calle Guerrero 48",
+    "colonia": "San Nicolás",
+    "telefono": "417-555-0118",
+    "whatsapp": "+52 417 555 0118",
+    "sitio_web": "https://www.patitasfelices.example.com",
+    "redes": {
+      "facebook": "https://facebook.com/patitasfelices.ficticio",
+      "instagram": "https://instagram.com/patitasfelices_ficticio",
+      "google_maps": "https://maps.google.com/?q=Veterinaria+Patitas+Felices+Acambaro+ficticio"
+    },
+    "horario": {
+      "lun": ["09:00-19:00"],
+      "mar": ["09:00-19:00"],
+      "mie": ["09:00-19:00"],
+      "jue": ["09:00-19:00"],
+      "vie": ["09:00-19:00"],
+      "sab": ["09:00-19:00"],
+      "dom": ["10:00-13:00"]
+    },
+    "etiquetas": ["veterinaria", "mascotas", "estetica canina"],
+    "actualizado": "2026-03-22"
+  },
+  {
+    "id": "estetica-canina-acambaro",
+    "nombre": "Estética Canina Acámbaro",
+    "categoria": "veterinaria",
+    "descripcion": "Baño, corte y spa para mascotas, con servicio a domicilio.",
+    "direccion": "Calle Allende 102",
+    "colonia": "Vista Hermosa",
+    "whatsapp": "+52 417 555 0119",
+    "redes": {
+      "instagram": "https://instagram.com/esteticacaninaacambaro_ficticio"
+    },
+    "horario": {
+      "lun": [],
+      "mar": ["10:00-18:00"],
+      "mie": ["10:00-18:00"],
+      "jue": ["10:00-18:00"],
+      "vie": ["10:00-18:00"],
+      "sab": ["10:00-18:00"],
+      "dom": []
+    },
+    "etiquetas": ["estetica canina", "mascotas", "spa"],
+    "actualizado": "2025-04-11"
+  },
+  {
+    "id": "salon-glamour",
+    "nombre": "Salón de Belleza Glamour",
+    "categoria": "salon_belleza",
+    "descripcion": "Corte, color y peinados para toda ocasión.",
+    "direccion": "Portal Hidalgo 70",
+    "colonia": "Centro",
+    "telefono": "417-555-0120",
+    "whatsapp": "+52 417 555 0120",
+    "redes": {
+      "facebook": "https://facebook.com/salonglamour.ficticio",
+      "instagram": "https://instagram.com/salonglamour_ficticio"
+    },
+    "horario": {
+      "lun": [],
+      "mar": ["09:30-19:30"],
+      "mie": ["09:30-19:30"],
+      "jue": ["09:30-19:30"],
+      "vie": ["09:30-19:30"],
+      "sab": ["09:30-19:30"],
+      "dom": []
+    },
+    "etiquetas": ["salon de belleza", "corte", "peinados"],
+    "actualizado": "2025-11-29"
+  },
+  {
+    "id": "barberia-el-clasico",
+    "nombre": "Barbería El Clásico",
+    "categoria": "salon_belleza",
+    "descripcion": "Cortes clásicos y arreglo de barba, ambiente tradicional.",
+    "direccion": "Calle Juárez 15",
+    "colonia": "La Cruz",
+    "telefono": "417-555-0121",
+    "horario": {
+      "lun": ["09:00-20:00"],
+      "mar": ["09:00-20:00"],
+      "mie": ["09:00-20:00"],
+      "jue": ["09:00-20:00"],
+      "vie": ["09:00-20:00"],
+      "sab": ["09:00-20:00"],
+      "dom": []
+    },
+    "etiquetas": ["barberia", "corte de cabello", "barba"],
+    "actualizado": "2025-02-14"
+  }
+]

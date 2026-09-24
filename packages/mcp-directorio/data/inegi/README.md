@@ -84,9 +84,17 @@ Este catálogo es **solo clasificación**, no hay ningún negocio individual rea
 1. **API DENUE** (`inegi.org.mx/servicios/api_denue.html`): requiere un token gratuito que se obtiene registrando una cuenta en el sitio de INEGI — un paso que solo puede hacer una persona, no un asistente automatizado.
 2. **Descarga masiva**: la herramienta oficial de INEGI para descarga masiva por municipio es un ejecutable de Windows (`DescargaMasivaApp.exe`), no ejecutable desde este entorno.
 
+## Herramienta de importación (`scripts/importar-denue.ts`)
+
+Ya existe el código para los pasos 2-3 de abajo: `pnpm importar-denue` (con `DENUE_TOKEN` en el ambiente) consulta `BuscarAreaAct` del DENUE por cada clase SCIAN ya mapeada en `scian-comercio-servicios-acambaro.csv`, filtrando por el municipio de Acámbaro (entidad `11` = Guanajuato, municipio `002` = Acámbaro), normaliza los resultados contra `src/domain/denue.ts` y los escribe en `data/inegi/denue-candidatos.json` — un archivo de **staging**, marcado explícitamente como "sin revisar ni consentimiento". El script nunca toca `src/data/negocios.json`.
+
+**Sin verificar contra la API real todavía** porque falta el único bloqueador real: un **token** de la API DENUE, gratuito, que se obtiene registrando una cuenta en el sitio de INEGI — un paso que solo puede hacer una persona. (El acceso de red desde este entorno de trabajo sí funciona: una prueba con un token inválido llegó hasta `inegi.org.mx` y recibió un 403 real de la API, no un bloqueo de red — así que correr el script en cuanto haya un token real debería funcionar desde aquí mismo.)
+
+El schema de `src/domain/denue.ts` (nombres de campo, estructura del endpoint `BuscarAreaAct`) se armó reconstruyendo la documentación oficial a partir de fuentes secundarias (resultados de búsqueda, bibliotecas de terceros), no leyéndola directamente. Es razonablemente confiable pero **no está confirmado contra una respuesta real** — la primera corrida real puede revelar que algún nombre de campo no calza; el schema está escrito para fallar fuerte (zod) en ese caso en vez de producir candidatos con datos corruptos en silencio.
+
 ## Próximos pasos (cuando se retome)
 
 1. Registrar una cuenta en INEGI y obtener el token gratuito de la API DENUE.
-2. Con el token, consultar DENUE filtrando por el municipio de Acámbaro (clave de entidad 11 = Guanajuato) y, opcionalmente, por las claves SCIAN de este catálogo.
-3. Normalizar los campos que devuelve DENUE (nombre, calle, colonia, teléfono, correo, sitio web, coordenadas, estrato de personal) contra el tipo `Negocio` de `src/domain/tipos.ts`, y completar los campos que el MVP necesita y DENUE no trae (horario, WhatsApp, redes sociales, etiquetas) — probablemente vía contacto directo con cada negocio.
-4. Decidir explícitamente, y solo entonces, si algún registro real pasa a `src/data/negocios.json` — lo que implica actualizar la política de "datos ficticios" en `CLAUDE.md` y `docs/00-VISION-Y-ALCANCE.md`, y obtener el consentimiento del negocio antes de publicar sus datos de contacto.
+2. Correr `pnpm importar-denue` con el token real y corregir `src/domain/denue.ts` si algún campo de la respuesta no calza con lo documentado arriba.
+3. Ya normalizado por `normalizarRegistroDenue`; sigue pendiente completar a mano, por negocio, los campos que `Negocio` (`src/domain/tipos.ts`) necesita y DENUE no trae (horario, WhatsApp, redes sociales, etiquetas) — probablemente vía contacto directo con cada negocio.
+4. Decidir explícitamente, y solo entonces, si algún candidato de `denue-candidatos.json` pasa a `src/data/negocios.json` — lo que implica actualizar la política de "datos ficticios" en `CLAUDE.md` y `docs/00-VISION-Y-ALCANCE.md`, y obtener el consentimiento del negocio antes de publicar sus datos de contacto.

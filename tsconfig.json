@@ -9,5 +9,10 @@
     "noEmit": true
   },
   "include": ["*.ts"],
-  "references": [{ "path": "packages/mcp-directorio" }, { "path": "packages/mcp-client" }]
+  "references": [
+    { "path": "packages/mcp-directorio" },
+    { "path": "packages/mcp-client" },
+    { "path": "packages/core" },
+    { "path": "packages/agents" }
+  ]
 }

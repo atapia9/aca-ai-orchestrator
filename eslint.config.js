@@ -9,4 +9,14 @@ export default tseslint.config(
   {
     ignores: ["**/dist/**", "**/coverage/**", "**/node_modules/**", "output/**"],
   },
+  {
+    rules: {
+      // Permite el patrón estándar de destructuring para excluir una clave:
+      // const { campo: _campo, ...resto } = objeto;
+      "@typescript-eslint/no-unused-vars": [
+        "error",
+        { argsIgnorePattern: "^_", varsIgnorePattern: "^_" },
+      ],
+    },
+  },
 );

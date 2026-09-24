@@ -8,10 +8,18 @@ export function registrarPrompts(server: McpServer): void {
     "recomendar_negocio",
     {
       title: "Recomendar negocio",
-      description: "Guía al modelo para recomendar negocios del directorio según lo que necesita el usuario.",
+      description:
+        "Guía al modelo para recomendar negocios del directorio según lo que necesita el usuario.",
       argsSchema: {
-        necesidad: z.string().min(1).describe("Qué necesita o busca el usuario, en sus propias palabras."),
-        colonia: z.string().min(1).optional().describe("Colonia preferida del usuario, si la mencionó."),
+        necesidad: z
+          .string()
+          .min(1)
+          .describe("Qué necesita o busca el usuario, en sus propias palabras."),
+        colonia: z
+          .string()
+          .min(1)
+          .optional()
+          .describe("Colonia preferida del usuario, si la mencionó."),
       },
     },
     ({ necesidad, colonia }) => ({
@@ -37,7 +45,8 @@ export function registrarPrompts(server: McpServer): void {
     "propuesta_sdda",
     {
       title: "Propuesta SDDA",
-      description: "Genera un borrador de propuesta comercial de SDDA para un negocio, según su diagnóstico digital.",
+      description:
+        "Genera un borrador de propuesta comercial de SDDA para un negocio, según su diagnóstico digital.",
       argsSchema: {
         id: z.string().min(1).describe("Id (slug) del negocio, por ejemplo 'cafe-la-parroquia'."),
       },

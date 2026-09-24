@@ -3,11 +3,13 @@
 > **En una línea:** contexto y reglas para que Claude Code construya este MCP de forma consistente.
 
 ## Proyecto
+
 Servidor MCP en TypeScript: directorio de negocios de Acámbaro, Gto., con diagnóstico digital vinculado a SDDA (Servicios Digitales de Acámbaro). Portafolio público de Armando Tapia (GitHub `atapia9`).
 
 Documentos de referencia: `docs/00-VISION-Y-ALCANCE.md`, `docs/01-ARQUITECTURA.md`, `docs/02-ROADMAP.md`.
 
 ## Comandos
+
 ```bash
 npm install
 npm run dev        # tsx watch src/index.ts
@@ -18,6 +20,7 @@ npm run inspect    # npx @modelcontextprotocol/inspector node dist/index.js
 ```
 
 ## Reglas
+
 1. Trabaja **por fases** del roadmap; marca las casillas completadas en `docs/02-ROADMAP.md`.
 2. Lógica en `src/domain/` sin dependencias del SDK; siempre con pruebas.
 3. Valida toda entrada de tools con `zod`.
@@ -29,5 +32,6 @@ npm run inspect    # npx @modelcontextprotocol/inspector node dist/index.js
 9. Cambios pequeños y explicados; pregunta antes de agregar dependencias nuevas.
 
 ## Estilo
+
 - TypeScript `strict`, ESM, funciones puras cuando sea posible.
 - Comentarios didácticos breves (el repo también sirve como material de clase).

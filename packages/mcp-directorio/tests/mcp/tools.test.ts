@@ -5,7 +5,10 @@ describe("tool buscar_negocios", () => {
   it("encuentra negocios por texto libre sin importar acentos", async () => {
     const { cliente } = await conectarClienteYServidor();
 
-    const resultado = await cliente.callTool({ name: "buscar_negocios", arguments: { texto: "cafe" } });
+    const resultado = await cliente.callTool({
+      name: "buscar_negocios",
+      arguments: { texto: "cafe" },
+    });
 
     const negocios = (resultado.structuredContent as { negocios: { id: string }[] }).negocios;
     expect(negocios.map((n) => n.id)).toContain("cafe-la-parroquia");
@@ -40,7 +43,10 @@ describe("tool detalle_negocio", () => {
   it("regresa la ficha completa de un negocio existente", async () => {
     const { cliente } = await conectarClienteYServidor();
 
-    const resultado = await cliente.callTool({ name: "detalle_negocio", arguments: { id: "cafe-la-parroquia" } });
+    const resultado = await cliente.callTool({
+      name: "detalle_negocio",
+      arguments: { id: "cafe-la-parroquia" },
+    });
 
     const negocio = resultado.structuredContent as { nombre: string; colonia: string };
     expect(negocio.nombre).toBe("Café La Parroquia");
@@ -50,10 +56,15 @@ describe("tool detalle_negocio", () => {
   it("regresa un error claro cuando el id no existe", async () => {
     const { cliente } = await conectarClienteYServidor();
 
-    const resultado = await cliente.callTool({ name: "detalle_negocio", arguments: { id: "no-existe" } });
+    const resultado = await cliente.callTool({
+      name: "detalle_negocio",
+      arguments: { id: "no-existe" },
+    });
 
     expect(resultado.isError).toBe(true);
-    expect((resultado.content as { type: string; text: string }[])[0].text).toMatch(/no se encontró/i);
+    expect((resultado.content as { type: string; text: string }[])[0].text).toMatch(
+      /no se encontró/i,
+    );
   });
 });
 
@@ -94,7 +105,11 @@ describe("tool diagnostico_digital", () => {
       arguments: { id: "cafe-la-parroquia" },
     });
 
-    const diagnostico = resultado.structuredContent as { puntaje: number; nivel: string; servicio_sugerido: string };
+    const diagnostico = resultado.structuredContent as {
+      puntaje: number;
+      nivel: string;
+      servicio_sugerido: string;
+    };
     expect(diagnostico.puntaje).toBe(100);
     expect(diagnostico.nivel).toBe("alto");
     expect(diagnostico.servicio_sugerido).toMatch(/optimización avanzada/i);
@@ -116,7 +131,10 @@ describe("tool diagnostico_digital", () => {
   it("regresa un error claro cuando el id no existe", async () => {
     const { cliente } = await conectarClienteYServidor();
 
-    const resultado = await cliente.callTool({ name: "diagnostico_digital", arguments: { id: "no-existe" } });
+    const resultado = await cliente.callTool({
+      name: "diagnostico_digital",
+      arguments: { id: "no-existe" },
+    });
 
     expect(resultado.isError).toBe(true);
   });

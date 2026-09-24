@@ -1,5 +1,9 @@
 import { describe, expect, it } from "vitest";
-import { estaAbiertoAhora, estaAbiertoEnMomento, negociosAbiertosEn } from "../../src/domain/horario.js";
+import {
+  estaAbiertoAhora,
+  estaAbiertoEnMomento,
+  negociosAbiertosEn,
+} from "../../src/domain/horario.js";
 import { crearNegocio } from "./fixtures.js";
 
 describe("estaAbiertoEnMomento", () => {
@@ -67,8 +71,14 @@ describe("estaAbiertoAhora", () => {
 
 describe("negociosAbiertosEn", () => {
   it("filtra solo los negocios abiertos en el día y hora indicados", () => {
-    const abierto = crearNegocio({ id: "abierto", horario: { lun: ["09:00-18:00"], mar: [], mie: [], jue: [], vie: [], sab: [], dom: [] } });
-    const cerrado = crearNegocio({ id: "cerrado", horario: { lun: [], mar: [], mie: [], jue: [], vie: [], sab: [], dom: [] } });
+    const abierto = crearNegocio({
+      id: "abierto",
+      horario: { lun: ["09:00-18:00"], mar: [], mie: [], jue: [], vie: [], sab: [], dom: [] },
+    });
+    const cerrado = crearNegocio({
+      id: "cerrado",
+      horario: { lun: [], mar: [], mie: [], jue: [], vie: [], sab: [], dom: [] },
+    });
 
     const resultado = negociosAbiertosEn([abierto, cerrado], "lun", "10:00");
 

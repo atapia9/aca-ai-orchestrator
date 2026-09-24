@@ -29,7 +29,9 @@ describe("negocios.json", () => {
         const rangos = negocio.horario[dia];
         expect(rangos, `${negocio.id} sin definición para ${dia}`).toBeDefined();
         for (const rango of rangos) {
-          expect(rango, `${negocio.id} tiene un rango inválido en ${dia}: ${rango}`).toMatch(RANGO_VALIDO);
+          expect(rango, `${negocio.id} tiene un rango inválido en ${dia}: ${rango}`).toMatch(
+            RANGO_VALIDO,
+          );
         }
       }
     }
@@ -41,9 +43,10 @@ describe("negocios.json", () => {
         expect(negocio.telefono, `${negocio.id} debe usar el prefijo ficticio 555`).toMatch(/555/);
       }
       if (negocio.sitio_web) {
-        expect(negocio.sitio_web, `${negocio.id} debe usar el dominio reservado example.com`).toContain(
-          ".example.com",
-        );
+        expect(
+          negocio.sitio_web,
+          `${negocio.id} debe usar el dominio reservado example.com`,
+        ).toContain(".example.com");
       }
     }
   });

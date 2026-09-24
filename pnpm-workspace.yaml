@@ -1,3 +1,11 @@
 packages:
   - "apps/*"
   - "packages/*"
+
+# better-sqlite3 (packages/mcp-directorio) necesita compilar/descargar su
+# binario nativo; esbuild (dependencia transitiva de vitest) igual.
+# pnpm >=10 bloquea scripts de instalacion por defecto, asi que se
+# aprueban explicitamente en vez de correr `pnpm approve-builds` a mano.
+onlyBuiltDependencies:
+  - better-sqlite3
+  - esbuild

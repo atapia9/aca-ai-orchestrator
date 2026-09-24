@@ -35,6 +35,8 @@ describe("prompt propuesta_sdda", () => {
   it("rechaza un id de negocio inexistente", async () => {
     const { cliente } = await conectarClienteYServidor();
 
-    await expect(cliente.getPrompt({ name: "propuesta_sdda", arguments: { id: "no-existe" } })).rejects.toThrow();
+    await expect(
+      cliente.getPrompt({ name: "propuesta_sdda", arguments: { id: "no-existe" } }),
+    ).rejects.toThrow();
   });
 });

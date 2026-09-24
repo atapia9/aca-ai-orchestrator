@@ -27,10 +27,19 @@ export function registrarTools(server: McpServer): void {
           .string()
           .min(1)
           .optional()
-          .describe("Texto libre a buscar en nombre, descripción, categoría o etiquetas (sin distinguir acentos)."),
-        categoria: z.string().min(1).optional().describe("Categoría exacta, por ejemplo 'cafeteria'."),
+          .describe(
+            "Texto libre a buscar en nombre, descripción, categoría o etiquetas (sin distinguir acentos).",
+          ),
+        categoria: z
+          .string()
+          .min(1)
+          .optional()
+          .describe("Categoría exacta, por ejemplo 'cafeteria'."),
         colonia: z.string().min(1).optional().describe("Colonia exacta, por ejemplo 'Centro'."),
-        abierto_ahora: z.boolean().optional().describe("Si es true, solo regresa negocios abiertos en este momento."),
+        abierto_ahora: z
+          .boolean()
+          .optional()
+          .describe("Si es true, solo regresa negocios abiertos en este momento."),
       },
       outputSchema: {
         total: z.number(),
@@ -108,9 +117,12 @@ export function registrarTools(server: McpServer): void {
     "negocios_abiertos",
     {
       title: "Negocios abiertos",
-      description: "Lista los negocios abiertos en un día y hora determinados (hora de Ciudad de México).",
+      description:
+        "Lista los negocios abiertos en un día y hora determinados (hora de Ciudad de México).",
       inputSchema: {
-        dia: z.enum(DIAS as [string, ...string[]]).describe("Día de la semana: lun, mar, mie, jue, vie, sab o dom."),
+        dia: z
+          .enum(DIAS as [string, ...string[]])
+          .describe("Día de la semana: lun, mar, mie, jue, vie, sab o dom."),
         hora: z
           .string()
           .regex(/^([01]\d|2[0-3]):[0-5]\d$/)
@@ -171,7 +183,9 @@ export function registrarTools(server: McpServer): void {
 
       const diagnostico = diagnosticarNegocio(negocio);
       const detalleFactores = diagnostico.factores
-        .map((factor) => `  ${factor.cumplido ? "✅" : "❌"} ${factor.nombre} (${factor.puntos} pts)`)
+        .map(
+          (factor) => `  ${factor.cumplido ? "✅" : "❌"} ${factor.nombre} (${factor.puntos} pts)`,
+        )
         .join("\n");
       const texto_resultado = [
         `${negocio.nombre}: ${diagnostico.puntaje}/100 (nivel ${diagnostico.nivel})`,

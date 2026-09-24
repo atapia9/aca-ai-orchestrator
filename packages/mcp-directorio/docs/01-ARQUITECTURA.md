@@ -34,24 +34,27 @@ Claude Desktop / Claude Code / otro cliente MCP
 ## 3. Capacidades MCP
 
 ### Tools
-| Nombre | Entrada | Salida |
-|---|---|---|
-| `buscar_negocios` | `texto?`, `categoria?`, `colonia?`, `abierto_ahora?` | Lista resumida |
-| `detalle_negocio` | `id` | Ficha completa (horario, contacto, redes, sitio) |
-| `negocios_abiertos` | `dia`, `hora` | Negocios abiertos en ese momento |
-| `diagnostico_digital` | `id` | Puntaje 0–100 de presencia digital + servicio SDDA sugerido |
+
+| Nombre                | Entrada                                              | Salida                                                      |
+| --------------------- | ---------------------------------------------------- | ----------------------------------------------------------- |
+| `buscar_negocios`     | `texto?`, `categoria?`, `colonia?`, `abierto_ahora?` | Lista resumida                                              |
+| `detalle_negocio`     | `id`                                                 | Ficha completa (horario, contacto, redes, sitio)            |
+| `negocios_abiertos`   | `dia`, `hora`                                        | Negocios abiertos en ese momento                            |
+| `diagnostico_digital` | `id`                                                 | Puntaje 0–100 de presencia digital + servicio SDDA sugerido |
 
 ### Resources
-| URI | Contenido |
-|---|---|
-| `directorio://categorias` | Catálogo de categorías |
-| `sdda://servicios` | Escalera de servicios SDDA (diagnóstico → acompañamiento) |
+
+| URI                       | Contenido                                                 |
+| ------------------------- | --------------------------------------------------------- |
+| `directorio://categorias` | Catálogo de categorías                                    |
+| `sdda://servicios`        | Escalera de servicios SDDA (diagnóstico → acompañamiento) |
 
 ### Prompts
-| Nombre | Uso |
-|---|---|
+
+| Nombre               | Uso                                                        |
+| -------------------- | ---------------------------------------------------------- |
 | `recomendar_negocio` | Guía al modelo para recomendar según necesidad del usuario |
-| `propuesta_sdda` | Genera borrador de propuesta comercial para un negocio |
+| `propuesta_sdda`     | Genera borrador de propuesta comercial para un negocio     |
 
 ## 4. Modelo de datos (Negocio)
 

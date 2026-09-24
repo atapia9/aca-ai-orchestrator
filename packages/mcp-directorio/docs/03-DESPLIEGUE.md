@@ -7,15 +7,16 @@ Este documento describe el plan; la ejecución contra el servidor real queda pen
 tener acceso SSH a la instancia y a la cuenta de Cloudflare.
 
 **Ya validado localmente** (sin Docker ni OCI, simulando el paso de producción): el servidor
-arranca y responde correctamente usando *solo* dependencias de producción (`npm ci --omit=dev`
-+ `dist/` ya compilado, igual que hace el Dockerfile y el unit de systemd), así que el único
-paso que falta es ejecutar esto en la instancia real.
+arranca y responde correctamente usando _solo_ dependencias de producción (`npm ci --omit=dev`
+
+- `dist/` ya compilado, igual que hace el Dockerfile y el unit de systemd), así que el único
+  paso que falta es ejecutar esto en la instancia real.
 
 ## Variables de entorno requeridas
 
-| Variable | Descripción |
-|---|---|
-| `PORT` | Puerto donde escucha el servidor HTTP (por defecto `3000`). |
+| Variable    | Descripción                                                                                                        |
+| ----------- | ------------------------------------------------------------------------------------------------------------------ |
+| `PORT`      | Puerto donde escucha el servidor HTTP (por defecto `3000`).                                                        |
 | `MCP_TOKEN` | Token que deben enviar los clientes en `Authorization: Bearer <token>`. Obligatorio: el proceso no arranca sin él. |
 
 Genera un token largo y aleatorio, por ejemplo con `openssl rand -hex 32`.

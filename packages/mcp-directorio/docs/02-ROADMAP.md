@@ -3,24 +3,28 @@
 > **En una línea:** los pasos, en orden, para pasar de repo vacío a MCP desplegado y presentable en el portafolio.
 
 ## Fase 0 — Preparación (1 día)
+
 - [x] Crear repo público `atapia9/mcp-directorio-acambaro` (MIT, `.gitignore` Node)
 - [x] Instalar Node 20+, Claude Desktop y Claude Code (nota: desde la Fase 5, `better-sqlite3`/`vitest` requieren Node 22.12+)
 - [x] Copiar estos `.md` a `docs/` y `CLAUDE.md` a la raíz
 - [x] Leer la documentación oficial: modelcontextprotocol.io (quickstart servidor TS) — objetivo técnico cumplido: la implementación (Fases 1–5) sigue el SDK oficial (`@modelcontextprotocol/sdk`) verificado contra sus tipos y probado en MCP Inspector
 
 ## Fase 1 — Esqueleto (1 día)
+
 - [x] `npm init`, TypeScript, ESLint, Prettier, vitest
 - [x] `src/index.ts` con `McpServer` + `StdioServerTransport`
 - [x] Tool de prueba `ping` y verificación en MCP Inspector
 - [x] Commit: `feat: esqueleto del servidor MCP`
 
 ## Fase 2 — Dominio y datos (2 días)
+
 - [x] `negocios.json` con 15–30 negocios ficticios en 6+ categorías
 - [x] `domain/horario.ts` (abierto ahora, zona horaria MX) + pruebas
 - [x] `domain/busqueda.ts` (texto, categoría, colonia, sin acentos) + pruebas
 - [x] `domain/diagnostico.ts` (puntaje de presencia digital) + pruebas
 
 ## Fase 3 — Capacidades MCP (2 días)
+
 - [x] Tools: `buscar_negocios`, `detalle_negocio`, `negocios_abiertos`, `diagnostico_digital`
 - [x] Resources: `directorio://categorias`, `sdda://servicios`
 - [x] Prompts: `recomendar_negocio`, `propuesta_sdda`
@@ -28,12 +32,14 @@
 - [x] Conectar en Claude Desktop y probar 5 preguntas reales — conectado desde Settings/Conectores de la app (edición manual de `claude_desktop_config.json` no sirve, la app la sobrescribe); verificado que Claude.app levantó `node dist/index.js` como subproceso y respondió correctamente a preguntas reales
 
 ## Fase 4 — Calidad y CI (1 día)
+
 - [x] GitHub Actions: lint + test + build en cada push/PR
 - [x] Cobertura ≥ 80 % en `domain/`
 - [x] Manejo de errores claro (id inexistente, parámetros inválidos)
 - [x] Tag `v0.1.0` y [release](https://github.com/atapia9/mcp-directorio-acambaro/releases/tag/v0.1.0)
 
 ## Fase 5 — Persistencia y despliegue (3 días)
+
 - [x] Migrar repositorio a SQLite (misma interfaz)
 - [x] `src/http.ts` con Streamable HTTP
 - [ ] Desplegar en instancia OCI A1 con Docker tras Cloudflare (`mcp.acambaro.com.mx`), HTTPS — preparado y validado localmente (simulación de "modo producción" con solo dependencias de producción, `deploy/cloudflared-config.example.yml`, `deploy/verificar.sh`); método y dominio ya decididos (ver `docs/03-DESPLIEGUE.md`), falta ejecutarlo en la instancia real, pendiente de acceso SSH/Cloudflare
@@ -41,6 +47,7 @@
 - [ ] Tag `v0.2.0`
 
 ## Fase 6 — Integración y vitrina (2 días)
+
 - [ ] (Opcional) Sincronizar con WordPress REST de staging.acambaro.com.mx
 - [ ] README final: badges, GIF demo, diagrama, instalación en 5 min — hecho salvo el GIF (badges, diagrama, instalación y sección "Ejemplo de uso" con salida real ya están); el GIF se graba una vez desplegado
 - [ ] Publicar en LinkedIn + fijar repo en perfil GitHub
@@ -48,4 +55,5 @@
 - [ ] Tag `v1.0.0`
 
 ## Estimado total
+
 ≈ **12 días de trabajo** (2–3 semanas a ritmo parcial).

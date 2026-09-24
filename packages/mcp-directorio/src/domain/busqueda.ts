@@ -10,21 +10,12 @@ export interface FiltrosBusqueda {
 }
 
 export function normalizarTexto(texto: string): string {
-  return texto
-    .normalize("NFD")
-    .replace(/[̀-ͯ]/g, "")
-    .toLowerCase()
-    .trim();
+  return texto.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().trim();
 }
 
 function coincideTexto(negocio: Negocio, texto: string): boolean {
   const consulta = normalizarTexto(texto);
-  const campos = [
-    negocio.nombre,
-    negocio.descripcion,
-    negocio.categoria,
-    ...negocio.etiquetas,
-  ];
+  const campos = [negocio.nombre, negocio.descripcion, negocio.categoria, ...negocio.etiquetas];
   return campos.some((campo) => normalizarTexto(campo).includes(consulta));
 }
 
@@ -33,7 +24,10 @@ export function buscarNegocios(negocios: Negocio[], filtros: FiltrosBusqueda = {
     if (filtros.texto && !coincideTexto(negocio, filtros.texto)) {
       return false;
     }
-    if (filtros.categoria && normalizarTexto(negocio.categoria) !== normalizarTexto(filtros.categoria)) {
+    if (
+      filtros.categoria &&
+      normalizarTexto(negocio.categoria) !== normalizarTexto(filtros.categoria)
+    ) {
       return false;
     }
     if (filtros.colonia && normalizarTexto(negocio.colonia) !== normalizarTexto(filtros.colonia)) {

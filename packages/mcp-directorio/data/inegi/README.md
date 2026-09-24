@@ -28,19 +28,19 @@ La columna `categoria_directorio` mapea **139 de las 151 clases (92 %)** a 65 ca
 
 **Las 11 categorías que ya existen en el MVP:**
 
-| categoria_directorio | claves SCIAN |
-|---|---|
-| `cafeteria` | 722515 |
-| `restaurante` | 722511, 722512, 722513, 722514, 722516, 722518, 722519 |
-| `pizzeria` | 722517 |
-| `panaderia` | 311812 |
-| `ferreteria` | 467111, 467112, 467113, 467114, 467115, 467116, 467117 (toda la rama 4671: ferretería, tlapalería, pintura, vidrios, materiales de construcción) |
-| `farmacia` | 464111, 464112, 463217 (pañales, venta típica de farmacia/minisúper) |
-| `taller_mecanico` | 811111–811199 (toda la rama 8111, reparación automotriz) |
-| `tienda_ropa` | 463211, 463212, 463213, 463214, 463216, 463218 |
-| `papeleria` | 465311, 465313 (papelería, revistas y periódicos) |
-| `veterinaria` | 541941, 541942 (mascotas), 541943, 541944 (ganadería) |
-| `salon_belleza` | 812110 (incluye peluquerías y barberías: el SCIAN no las separa) |
+| categoria_directorio | claves SCIAN                                                                                                                                     |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `cafeteria`          | 722515                                                                                                                                           |
+| `restaurante`        | 722511, 722512, 722513, 722514, 722516, 722518, 722519                                                                                           |
+| `pizzeria`           | 722517                                                                                                                                           |
+| `panaderia`          | 311812                                                                                                                                           |
+| `ferreteria`         | 467111, 467112, 467113, 467114, 467115, 467116, 467117 (toda la rama 4671: ferretería, tlapalería, pintura, vidrios, materiales de construcción) |
+| `farmacia`           | 464111, 464112, 463217 (pañales, venta típica de farmacia/minisúper)                                                                             |
+| `taller_mecanico`    | 811111–811199 (toda la rama 8111, reparación automotriz)                                                                                         |
+| `tienda_ropa`        | 463211, 463212, 463213, 463214, 463216, 463218                                                                                                   |
+| `papeleria`          | 465311, 465313 (papelería, revistas y periódicos)                                                                                                |
+| `veterinaria`        | 541941, 541942 (mascotas), 541943, 541944 (ganadería)                                                                                            |
+| `salon_belleza`      | 812110 (incluye peluquerías y barberías: el SCIAN no las separa)                                                                                 |
 
 **54 categorías nuevas propuestas** (agrupadas por tema; cada una con 1-8 clases SCIAN — el detalle exacto está en el CSV, columna `categoria_directorio`):
 
@@ -56,17 +56,17 @@ La columna `categoria_directorio` mapea **139 de las 151 clases (92 %)** a 65 ca
 
 **Las 12 clases que quedan sin mapear** son, a propósito, las que no encajan bien en un directorio de comercio local de cara al público:
 
-| clave_scian | nombre | por qué queda fuera |
-|---|---|---|
-| 311811 | Panificación industrial | escala de fábrica, no un local de barrio (distinto de `panaderia` = 311812, panificación tradicional) |
-| 311820 | Elaboración de galletas y pastas para sopa | igual: producción industrial, no venta directa al público |
-| 465211 | Grabaciones de audio y video en medios físicos | formato en desuso, muy poco probable como negocio activo hoy |
-| 722310 | Servicios de comedor para empresas e instituciones | contrato B2B (comedores industriales), no un local al que el público entra |
-| 811311–811314 | Reparación de maquinaria agropecuaria/industrial/comercial | servicio B2B especializado, no un giro típico de directorio al consumidor |
-| 811499 | Otros artículos para el hogar y personales (reparación) | cajón "otros", demasiado ambiguo para una categoría propia |
-| 812120 | Baños públicos | infraestructura pública, no un negocio privado típico |
-| 812130 | Sanitarios públicos y bolerías | ídem, categoría compuesta y poco frecuente |
-| 812990 | Otros servicios personales | cajón "otros", demasiado ambiguo |
+| clave_scian   | nombre                                                     | por qué queda fuera                                                                                   |
+| ------------- | ---------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| 311811        | Panificación industrial                                    | escala de fábrica, no un local de barrio (distinto de `panaderia` = 311812, panificación tradicional) |
+| 311820        | Elaboración de galletas y pastas para sopa                 | igual: producción industrial, no venta directa al público                                             |
+| 465211        | Grabaciones de audio y video en medios físicos             | formato en desuso, muy poco probable como negocio activo hoy                                          |
+| 722310        | Servicios de comedor para empresas e instituciones         | contrato B2B (comedores industriales), no un local al que el público entra                            |
+| 811311–811314 | Reparación de maquinaria agropecuaria/industrial/comercial | servicio B2B especializado, no un giro típico de directorio al consumidor                             |
+| 811499        | Otros artículos para el hogar y personales (reparación)    | cajón "otros", demasiado ambiguo para una categoría propia                                            |
+| 812120        | Baños públicos                                             | infraestructura pública, no un negocio privado típico                                                 |
+| 812130        | Sanitarios públicos y bolerías                             | ídem, categoría compuesta y poco frecuente                                                            |
+| 812990        | Otros servicios personales                                 | cajón "otros", demasiado ambiguo                                                                      |
 
 Si en el futuro aparece un negocio real de Acámbaro que caiga en una de estas clases, lo razonable es crear la categoría en ese momento (con el nombre real del negocio como referencia) en vez de adivinar una ahora.
 

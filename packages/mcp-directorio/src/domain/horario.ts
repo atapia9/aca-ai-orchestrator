@@ -65,11 +65,7 @@ export function estaAbiertoAhora(negocio: Negocio, fechaReferencia: Date = new D
   return estaAbiertoEnMomento(negocio, dia, minutosDesdeMedianoche);
 }
 
-export function negociosAbiertosEn(
-  negocios: Negocio[],
-  dia: Dia,
-  horaHHMM: string,
-): Negocio[] {
+export function negociosAbiertosEn(negocios: Negocio[], dia: Dia, horaHHMM: string): Negocio[] {
   const minutos = minutosDesdeHHMM(horaHHMM);
   return negocios.filter((negocio) => estaAbiertoEnMomento(negocio, dia, minutos));
 }

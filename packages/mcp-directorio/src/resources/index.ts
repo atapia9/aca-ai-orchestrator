@@ -47,7 +47,8 @@ export function registrarResources(server: McpServer): void {
     "sdda://servicios",
     {
       title: "Escalera de servicios SDDA",
-      description: "Los tres niveles de servicio de SDDA, vinculados al puntaje de diagnóstico_digital.",
+      description:
+        "Los tres niveles de servicio de SDDA, vinculados al puntaje de diagnóstico_digital.",
       mimeType: "text/markdown",
     },
     (uri) => ({

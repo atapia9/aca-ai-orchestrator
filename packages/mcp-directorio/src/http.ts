@@ -6,7 +6,9 @@ const PUERTO = Number(process.env.PORT ?? 3000);
 const TOKEN = process.env.MCP_TOKEN;
 
 if (!TOKEN) {
-  console.error("Falta la variable de entorno MCP_TOKEN: es obligatoria para exponer el servidor por HTTP.");
+  console.error(
+    "Falta la variable de entorno MCP_TOKEN: es obligatoria para exponer el servidor por HTTP.",
+  );
   process.exit(1);
 }
 
@@ -55,5 +57,7 @@ const httpServer = createServer((req, res) => {
 });
 
 httpServer.listen(PUERTO, () => {
-  console.error(`mcp-directorio-acambaro: servidor HTTP listo en el puerto ${PUERTO} (POST /mcp, GET /salud)`);
+  console.error(
+    `mcp-directorio-acambaro: servidor HTTP listo en el puerto ${PUERTO} (POST /mcp, GET /salud)`,
+  );
 });

@@ -26,7 +26,11 @@ function evaluarFactores(negocio: Negocio): FactorDiagnostico[] {
       cumplido: Boolean(negocio.redes?.facebook || negocio.redes?.instagram),
       puntos: 20,
     },
-    { nombre: "Ubicación en Google Maps", cumplido: Boolean(negocio.redes?.google_maps), puntos: 15 },
+    {
+      nombre: "Ubicación en Google Maps",
+      cumplido: Boolean(negocio.redes?.google_maps),
+      puntos: 15,
+    },
     { nombre: "Teléfono de contacto", cumplido: Boolean(negocio.telefono), puntos: 10 },
     {
       nombre: "Descripción con contenido suficiente",
@@ -55,7 +59,10 @@ function servicioSdaSugerido(nivel: NivelDigital): string {
 
 export function diagnosticarNegocio(negocio: Negocio): DiagnosticoDigital {
   const factores = evaluarFactores(negocio);
-  const puntaje = factores.reduce((total, factor) => total + (factor.cumplido ? factor.puntos : 0), 0);
+  const puntaje = factores.reduce(
+    (total, factor) => total + (factor.cumplido ? factor.puntos : 0),
+    0,
+  );
   const nivel = nivelDesdePuntaje(puntaje);
 
   return {

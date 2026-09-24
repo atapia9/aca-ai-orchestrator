@@ -11,7 +11,7 @@ import {
   type Negocio,
 } from "@acambaro/core";
 import { DirectorioClient } from "@acambaro/mcp-client";
-import { ejecutarDiagnosticoExpres, existeEstado } from "@acambaro/orchestrator";
+import { cargarEstado, ejecutarDiagnosticoExpres, existeEstado } from "@acambaro/orchestrator";
 import { aprobarInteractivo } from "./aprobacion.js";
 import { parsearArgumentos } from "./argumentos.js";
 import { fechaHoy, slugify } from "./slug.js";
@@ -31,9 +31,14 @@ async function main(): Promise<void> {
   }
 
   const manualNegocio = opciones.manual ? cargarNegocioManual(opciones.manual) : undefined;
+  // Al reanudar, --negocio no se vuelve a pasar: si el investigador todavía no
+  // corría (o corría con búsqueda de texto vía MCP), la consulta original solo
+  // vive en el state.json ya persistido.
+  const negocioQuery =
+    opciones.negocio ?? (opciones.resume ? cargarEstado(outputDir).negocioQuery : undefined);
 
   let mcpClient: DirectorioClient | undefined;
-  if (opciones.negocio) {
+  if (negocioQuery && !manualNegocio) {
     mcpClient = await DirectorioClient.connect();
   }
 
@@ -50,7 +55,7 @@ async function main(): Promise<void> {
       auto: opciones.auto,
       dryRun: opciones.dryRun,
       mcpClient,
-      negocioQuery: opciones.negocio,
+      negocioQuery,
       manualNegocio,
       resume: Boolean(opciones.resume),
       aprobar: aprobarInteractivo,

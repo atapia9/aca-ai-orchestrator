@@ -12,7 +12,6 @@ const registroBase: DenueRegistro = {
   CLEE: "111234567890123",
   Nombre: "Panadería La Espiga",
   Clase_actividad: "Panificación tradicional",
-  Id_clase_actividad: "311812",
   Calle: "Hidalgo",
   Colonia: "Centro",
   Tipo_vialidad: "Calle",
@@ -40,38 +39,42 @@ describe("normalizarRegistroDenue", () => {
   const mapaCategorias = new Map([["311812", "panaderia"]]);
 
   it("arma la dirección a partir de tipo de vialidad + calle + número exterior", () => {
-    const candidato = normalizarRegistroDenue(registroBase, mapaCategorias);
+    const candidato = normalizarRegistroDenue(registroBase, "311812", mapaCategorias);
     expect(candidato.direccion).toBe("Calle Hidalgo #45");
   });
 
-  it("mapea la clave SCIAN a categoría del directorio cuando existe en el catálogo", () => {
-    const candidato = normalizarRegistroDenue(registroBase, mapaCategorias);
+  it("usa la clave SCIAN consultada (no viene en la respuesta real) y mapea su categoría", () => {
+    const candidato = normalizarRegistroDenue(registroBase, "311812", mapaCategorias);
     expect(candidato.categoriaSugerida).toBe("panaderia");
     expect(candidato.claveScian).toBe("311812");
   });
 
-  it("deja categoriaSugerida sin definir si la clase SCIAN no está en el catálogo", () => {
-    const candidato = normalizarRegistroDenue(registroBase, new Map());
+  it("deja categoriaSugerida sin definir si la clave SCIAN no está en el catálogo", () => {
+    const candidato = normalizarRegistroDenue(registroBase, "311812", new Map());
     expect(candidato.categoriaSugerida).toBeUndefined();
   });
 
   it("convierte latitud/longitud a números", () => {
-    const candidato = normalizarRegistroDenue(registroBase, mapaCategorias);
+    const candidato = normalizarRegistroDenue(registroBase, "311812", mapaCategorias);
     expect(candidato.coordenadas).toEqual({ lat: 20.03642, lon: -100.72694 });
   });
 
   it("deja coordenadas sin definir si latitud/longitud vienen vacías", () => {
-    const candidato = normalizarRegistroDenue({ ...registroBase, Latitud: "", Longitud: "" }, mapaCategorias);
+    const candidato = normalizarRegistroDenue(
+      { ...registroBase, Latitud: "", Longitud: "" },
+      "311812",
+      mapaCategorias,
+    );
     expect(candidato.coordenadas).toBeUndefined();
   });
 
   it("trata sitio_internet vacío como sin sitio web", () => {
-    const candidato = normalizarRegistroDenue(registroBase, mapaCategorias);
+    const candidato = normalizarRegistroDenue(registroBase, "311812", mapaCategorias);
     expect(candidato.sitioWeb).toBeUndefined();
   });
 
   it("siempre marca los campos que Negocio necesita y DENUE no trae", () => {
-    const candidato = normalizarRegistroDenue(registroBase, mapaCategorias);
+    const candidato = normalizarRegistroDenue(registroBase, "311812", mapaCategorias);
     expect(candidato.camposPendientes).toEqual(["whatsapp", "horario", "redes", "etiquetas"]);
   });
 });

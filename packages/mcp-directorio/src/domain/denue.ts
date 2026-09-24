@@ -3,13 +3,12 @@ import { z } from "zod";
 /**
  * Forma de un registro tal como lo regresa `BuscarAreaAct` de la API del
  * DENUE (INEGI). Nombres de campo reconstruidos de fuentes secundarias
- * (documentación indexada por buscadores y bibliotecas de terceros) porque
- * este entorno no tiene acceso de red a inegi.org.mx y todavía no hay un
- * token para probar contra la API real (ver data/inegi/README.md). Antes de
- * usarse contra datos reales: correr una consulta de prueba y corregir aquí
- * cualquier campo que no calce - por diseño, un campo requerido que no
- * aparezca en la respuesta real debe tronar el parseo (zod), no producir un
- * candidato con datos incompletos en silencio.
+ * (documentación indexada por buscadores y bibliotecas de terceros, sin
+ * acceso directo a inegi.org.mx) y verificados contra una corrida real
+ * (2026-09-24, 4316 candidatos en Acámbaro, ver data/inegi/README.md). Un
+ * campo asumido no existía en la respuesta real (`Id_clase_actividad`, la
+ * clase SCIAN no viene de vuelta) - se corrigió recibiéndolo como parámetro
+ * en vez de leerlo del registro, ver `normalizarRegistroDenue`.
  */
 export const denueRegistroSchema = z.object({
   Id: z.string(),
@@ -17,7 +16,6 @@ export const denueRegistroSchema = z.object({
   Nombre: z.string(),
   Razon_social: z.string().optional(),
   Clase_actividad: z.string(),
-  Id_clase_actividad: z.string().optional(),
   Estrato: z.string().optional(),
   Tipo_vialidad: z.string().optional(),
   Calle: z.string(),
@@ -68,8 +66,16 @@ export const CAMPOS_QUE_DENUE_NO_TRAE: readonly string[] = [
   "etiquetas",
 ];
 
+/**
+ * `claveScian` se recibe como parámetro (no se lee del registro): confirmado
+ * con datos reales que la API no trae de vuelta un campo con el código
+ * numérico de la clase (el campo que se había asumido, `Id_clase_actividad`,
+ * no existe en la respuesta real). No hace falta adivinarlo: `BuscarAreaAct`
+ * ya filtra por una clase específica, así que el llamador siempre la sabe.
+ */
 export function normalizarRegistroDenue(
   registro: DenueRegistro,
+  claveScian: string,
   claveScianACategoria: ReadonlyMap<string, string>,
 ): NegocioCandidatoDenue {
   const direccion = [
@@ -91,10 +97,8 @@ export function normalizarRegistroDenue(
     fuenteDenueId: registro.Id,
     clee: registro.CLEE,
     nombre: registro.Nombre,
-    categoriaSugerida: registro.Id_clase_actividad
-      ? claveScianACategoria.get(registro.Id_clase_actividad)
-      : undefined,
-    claveScian: registro.Id_clase_actividad ?? "",
+    categoriaSugerida: claveScianACategoria.get(claveScian),
+    claveScian,
     descripcionActividad: registro.Clase_actividad,
     direccion: direccion || registro.Calle,
     colonia: registro.Colonia,

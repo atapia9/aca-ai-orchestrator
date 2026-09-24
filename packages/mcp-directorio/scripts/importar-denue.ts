@@ -116,7 +116,7 @@ async function main(): Promise<void> {
       }
 
       for (const registro of resultado.data) {
-        const candidato = normalizarRegistroDenue(registro, mapaCategorias);
+        const candidato = normalizarRegistroDenue(registro, claveScian, mapaCategorias);
         candidatosPorId.set(candidato.fuenteDenueId, candidato);
       }
 

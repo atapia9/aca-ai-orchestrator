@@ -4,7 +4,7 @@
 
 Construido por [Armando Tapia](https://github.com/atapia9) para **SDDA — Servicios Digitales de Acámbaro**, la marca de consultoría de Acambaro.com.mx. Aplica a Acámbaro el mismo patrón multiagente del _IBEX AI Business Orchestrator_.
 
-**Estado:** en construcción (Fase 2 de 6 del MVP1). Ver [`docs/ROADMAP.md`](docs/ROADMAP.md).
+**Estado:** en construcción (Fase 3 de 6 del MVP1). Ver [`docs/ROADMAP.md`](docs/ROADMAP.md).
 
 ## Qué va a hacer (MVP1)
 

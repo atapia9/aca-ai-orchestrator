@@ -13,6 +13,8 @@
     { "path": "packages/mcp-directorio" },
     { "path": "packages/mcp-client" },
     { "path": "packages/core" },
-    { "path": "packages/agents" }
+    { "path": "packages/agents" },
+    { "path": "packages/orchestrator" },
+    { "path": "apps/cli" }
   ]
 }

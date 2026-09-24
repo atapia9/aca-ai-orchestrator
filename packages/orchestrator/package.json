@@ -1,0 +1,20 @@
+{
+  "name": "@acambaro/orchestrator",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Grafo de ejecucion de los 5 agentes, estado, reanudacion y aprobacion humana.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc --build",
+    "typecheck": "tsc --build --force",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage"
+  },
+  "dependencies": {
+    "@acambaro/agents": "workspace:*",
+    "@acambaro/core": "workspace:*",
+    "zod": "^4.6.5"
+  }
+}

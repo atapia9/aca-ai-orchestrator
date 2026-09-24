@@ -4,7 +4,7 @@
 > Cada salida se valida con zod antes de tocar disco, y un tope de gasto (`MAX_USD_PER_RUN`) se verifica antes de cada llamada al modelo — nunca después.
 > Construido por [Armando Tapia](https://github.com/atapia9) para **SDDA — Servicios Digitales de Acámbaro**, la marca de consultoría de Acambaro.com.mx.
 
-**Demo interactiva:** [`docs/index.html`](docs/index.html) — pipeline de los 5 agentes, métricas reales y la corrida `--live` completa, listo para publicarse en GitHub Pages (Settings → Pages → Deploy from a branch → `main` / `/docs`).
+**🔗 [Demo en vivo](https://atapia9.github.io/aca-ai-orchestrator/docs/index.html#top)** — pipeline de los 5 agentes, métricas reales y la corrida `--live` completa. Código en [`docs/index.html`](docs/index.html).
 
 **Estado:** MVP1 completo (Fases 0-5, ver el [informe de cierre](docs/CIERRE-MVP1.md)). MVP2 en curso: el directorio ya puede poblarse con negocios reales de Acámbaro vía la API DENUE del INEGI (`pnpm importar-denue`, ver [`packages/mcp-directorio/data/inegi/README.md`](packages/mcp-directorio/data/inegi/README.md)). Detalle y siguientes pasos en [`docs/ROADMAP.md`](docs/ROADMAP.md).
 

@@ -30,6 +30,25 @@ const TAMANO_PAGINA = 100;
 const ENTIDAD_GUANAJUATO = "11";
 const MUNICIPIO_ACAMBARO = "002";
 
+/**
+ * Un fallo de red (no de HTTP) es poco frecuente pero real en una corrida de
+ * ~150 consultas seguidas ("fetch failed" visto en pruebas reales) - un
+ * reintento con una pequeña pausa es más barato que perder esa clase SCIAN.
+ */
+async function consultarConReintento(url: string): Promise<unknown> {
+  try {
+    const respuesta = await fetch(url);
+    if (!respuesta.ok) throw new Error(`HTTP ${respuesta.status}`);
+    return await respuesta.json();
+  } catch (error) {
+    if (error instanceof Error && error.message.startsWith("HTTP ")) throw error;
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    const respuesta = await fetch(url);
+    if (!respuesta.ok) throw new Error(`HTTP ${respuesta.status}`, { cause: error });
+    return await respuesta.json();
+  }
+}
+
 async function main(): Promise<void> {
   const token = process.env.DENUE_TOKEN;
   if (!token) {
@@ -69,13 +88,20 @@ async function main(): Promise<void> {
 
       let cuerpo: unknown;
       try {
-        const respuesta = await fetch(url);
-        if (!respuesta.ok) throw new Error(`HTTP ${respuesta.status}`);
-        cuerpo = await respuesta.json();
+        cuerpo = await consultarConReintento(url);
       } catch (error) {
         console.error(
           `  ✗ ${claveScian}: ${error instanceof Error ? error.message : String(error)}`,
         );
+        break;
+      }
+
+      // DENUE regresa un string (no un arreglo) cuando la consulta no tiene
+      // resultados, en vez de un arreglo vacío - confirmado en una corrida real
+      // contra Acámbaro (clases sin ningún negocio registrado, ej. panificación
+      // industrial). Se trata como "0 registros", no como error.
+      if (typeof cuerpo === "string") {
+        console.log(`  · ${claveScian}: sin resultados ("${cuerpo}")`);
         break;
       }
 

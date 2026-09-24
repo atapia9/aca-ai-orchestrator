@@ -1,0 +1,19 @@
+{
+  "name": "@acambaro/agents",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Los 5 agentes del Diagnostico Expres SDDA, con sus prompts versionados.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc --build",
+    "typecheck": "tsc --build --force",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage"
+  },
+  "dependencies": {
+    "@acambaro/core": "workspace:*",
+    "zod": "^4.6.5"
+  }
+}

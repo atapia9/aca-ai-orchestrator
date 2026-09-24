@@ -34,6 +34,9 @@ import {
 } from "./reportes.js";
 
 const MAX_TOKENS_POR_LLAMADA = 4096;
+// generarConReintento hace hasta 2 llamadas reales por paso (intento + reintento
+// si la primera no valida); el presupuesto debe reservar para ambas, no solo la primera.
+const LLAMADAS_MAX_POR_PASO = 2;
 
 export type DecisionAprobacion =
   { tipo: "si" } | { tipo: "no" } | { tipo: "editar"; recomendacion: Recomendacion };
@@ -98,16 +101,18 @@ export async function ejecutarDiagnosticoExpres(
     servicios: opciones.servicios,
   };
   const model = opciones.provider.model;
-  const presupuesto = () =>
+  const presupuesto = (llamadas = LLAMADAS_MAX_POR_PASO) =>
     verificarPresupuesto(
       costoAcumuladoUsd(estado, model),
       model,
       MAX_TOKENS_POR_LLAMADA,
       opciones.maxUsdPerRun,
+      llamadas,
     );
 
-  // Paso 1: Investigador
+  // Paso 1: Investigador (puede llamar al modelo para desambiguar candidatos)
   if (!estado.steps.investigador) {
+    presupuesto();
     const input: InvestigadorInput = opciones.manualNegocio
       ? { tipo: "manual", negocio: opciones.manualNegocio }
       : { tipo: "id", query: opciones.negocioQuery! };
@@ -131,36 +136,44 @@ export async function ejecutarDiagnosticoExpres(
   // Pasos 3 (Estratega) y 4 (Contenido) en paralelo
   if (!estado.steps.estratega || !estado.steps.contenido) {
     const faltantes = Number(!estado.steps.estratega) + Number(!estado.steps.contenido);
-    verificarPresupuesto(
-      costoAcumuladoUsd(estado, model),
-      model,
-      MAX_TOKENS_POR_LLAMADA,
-      opciones.maxUsdPerRun,
-      faltantes,
-    );
+    presupuesto(faltantes * LLAMADAS_MAX_POR_PASO);
 
-    const [estrategaResultado, contenidoResultado] = await Promise.all([
-      estado.steps.estratega ? undefined : ejecutarEstratega(diagnostico, ctx),
-      estado.steps.contenido ? undefined : ejecutarContenido({ negocio, diagnostico }, ctx),
+    // Promise.allSettled (no Promise.all): si uno de los dos falla, el otro ya
+    // pagado igual se persiste antes de propagar el error - si no, --resume
+    // volvería a pagar por el que sí había salido bien.
+    const [estrategaSettled, contenidoSettled] = await Promise.allSettled([
+      estado.steps.estratega ? Promise.resolve(undefined) : ejecutarEstratega(diagnostico, ctx),
+      estado.steps.contenido
+        ? Promise.resolve(undefined)
+        : ejecutarContenido({ negocio, diagnostico }, ctx),
     ]);
 
-    if (estrategaResultado) {
-      estado.steps.estratega = pasoCompletado(estrategaResultado.usage, estrategaResultado.data);
+    if (estrategaSettled.status === "fulfilled" && estrategaSettled.value) {
+      estado.steps.estratega = pasoCompletado(
+        estrategaSettled.value.usage,
+        estrategaSettled.value.data,
+      );
       escribirArchivo(
         opciones.outputDir,
         "03-recomendacion.md",
-        renderRecomendacion(estrategaResultado.data),
+        renderRecomendacion(estrategaSettled.value.data),
       );
     }
-    if (contenidoResultado) {
-      estado.steps.contenido = pasoCompletado(contenidoResultado.usage, contenidoResultado.data);
+    if (contenidoSettled.status === "fulfilled" && contenidoSettled.value) {
+      estado.steps.contenido = pasoCompletado(
+        contenidoSettled.value.usage,
+        contenidoSettled.value.data,
+      );
       escribirArchivo(
         opciones.outputDir,
         "04-contenido.md",
-        renderContenido(contenidoResultado.data),
+        renderContenido(contenidoSettled.value.data),
       );
     }
     guardarEstado(opciones.outputDir, estado);
+
+    if (estrategaSettled.status === "rejected") throw estrategaSettled.reason;
+    if (contenidoSettled.status === "rejected") throw contenidoSettled.reason;
   }
   let recomendacion = estado.steps.estratega!.data;
   const publicaciones = estado.steps.contenido!.data;

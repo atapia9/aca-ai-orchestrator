@@ -10,6 +10,7 @@ import {
 } from "@acambaro/core";
 import { BudgetExceededError } from "@acambaro/core";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
+import { cargarEstado } from "../src/estado.js";
 import { ejecutarDiagnosticoExpres, type EjecutarOpciones } from "../src/grafo.js";
 
 const negocio: Negocio = {
@@ -201,6 +202,33 @@ describe("ejecutarDiagnosticoExpres - reanudación", () => {
     );
     // Los pasos reanudados conservan los datos de la primera corrida.
     expect(final.estado.steps.investigador?.data.id).toBe(negocio.id);
+  });
+});
+
+describe("ejecutarDiagnosticoExpres - paso paralelo con fallo parcial", () => {
+  it("si contenido falla, el resultado de estratega (ya pagado) se persiste y no se repite al reanudar", async () => {
+    // Estratega consume el fixture 2 y contenido el 3: MockProvider.generateStructured
+    // no tiene ningún await interno, así que el orden de consumo entre las dos
+    // llamadas paralelas es determinista para este código (no una carrera real).
+    const provider1 = new MockProvider([diagnosticoFixture, estrategaFixture]);
+
+    await expect(
+      ejecutarDiagnosticoExpres(opcionesBase({ provider: provider1 })),
+    ).rejects.toThrow("no hay más respuestas");
+
+    const estadoParcial = cargarEstado(dir);
+    expect(estadoParcial.steps.estratega?.data.servicio.id).toBe("taller-operacion-digital");
+    expect(estadoParcial.steps.contenido).toBeUndefined();
+
+    // Solo contenido y propuesta en la cola: si el resume repitiera estratega
+    // (ya pagado), fallaría al no matchear su schema con estos fixtures.
+    const provider2 = new MockProvider([contenidoFixture, propuestaFixture]);
+    const final = await ejecutarDiagnosticoExpres(
+      opcionesBase({ provider: provider2, resume: true, manualNegocio: undefined }),
+    );
+
+    expect(final.completo).toBe(true);
+    expect(final.estado.steps.estratega?.data.servicio.id).toBe("taller-operacion-digital");
   });
 });
 

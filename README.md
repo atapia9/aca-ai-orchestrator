@@ -4,7 +4,7 @@
 > Cada salida se valida con zod antes de tocar disco, y un tope de gasto (`MAX_USD_PER_RUN`) se verifica antes de cada llamada al modelo — nunca después.
 > Construido por [Armando Tapia](https://github.com/atapia9) para **SDDA — Servicios Digitales de Acámbaro**, la marca de consultoría de Acambaro.com.mx.
 
-**Estado:** MVP1 completo (Fases 0-5). Ver [`docs/ROADMAP.md`](docs/ROADMAP.md) para el detalle y los siguientes pasos hacia MVP2.
+**Estado:** MVP1 completo (Fases 0-5). Ver el [informe de cierre](docs/CIERRE-MVP1.md) (qué se entregó, métricas, deuda técnica) y [`docs/ROADMAP.md`](docs/ROADMAP.md) para los siguientes pasos hacia MVP2.
 
 ## Arquitectura
 

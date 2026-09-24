@@ -4,7 +4,7 @@
 
 Construido por [Armando Tapia](https://github.com/atapia9) para **SDDA — Servicios Digitales de Acámbaro**, la marca de consultoría de Acambaro.com.mx. Aplica a Acámbaro el mismo patrón multiagente del _IBEX AI Business Orchestrator_.
 
-**Estado:** en construcción (Fase 3 de 6 del MVP1). Ver [`docs/ROADMAP.md`](docs/ROADMAP.md).
+**Estado:** en construcción (Fase 4 de 6 del MVP1). Ver [`docs/ROADMAP.md`](docs/ROADMAP.md).
 
 ## Qué va a hacer (MVP1)
 
@@ -21,6 +21,14 @@ Dado un negocio (del directorio MCP o capturado a mano), produce en Markdown:
 3. Recomendación de servicio de la escalera SDDA.
 4. 3 publicaciones de redes sociales.
 5. Una propuesta comercial — con un punto de aprobación humana antes de generarla.
+
+Pruébalo ya mismo sin API key ni costo (`--dry-run` usa fixtures fijas):
+
+```bash
+cp .env.example .env   # ANTHROPIC_MODEL ya trae un valor por defecto
+pnpm install && pnpm build
+pnpm orchestrate diagnostico --manual samples/negocio-ejemplo.json --dry-run --auto
+```
 
 ## Estructura del monorepo
 

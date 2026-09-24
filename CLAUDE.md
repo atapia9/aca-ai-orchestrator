@@ -16,8 +16,9 @@ pnpm lint               # eslint .
 pnpm format             # prettier --write .
 pnpm test               # vitest run (workspace: cada paquete trae su propio vitest.config.ts)
 pnpm test:coverage
-pnpm orchestrate diagnostico --negocio "<id-o-nombre>"                   # Fase 4+
-pnpm orchestrate diagnostico --manual ./samples/negocio-ejemplo.json --dry-run
+pnpm orchestrate diagnostico --negocio "<id-o-nombre>"
+pnpm orchestrate diagnostico --manual ./samples/negocio-ejemplo.json --dry-run --auto
+pnpm orchestrate diagnostico --resume output/<fecha>-<slug>
 pnpm eval                # Fase 5+
 ```
 
@@ -45,7 +46,7 @@ pnpm eval                # Fase 5+
 ## Cómo añadir un agente
 
 1. Crear el prompt de sistema versionado en `packages/agents/prompts/<nombre>.md`.
-2. Definir el esquema zod de entrada y de salida (junto al agente, en `packages/agents/src/<nombre>/`).
+2. Definir el esquema zod de entrada y de salida (junto al agente, en `packages/agents/src/<nombre>.ts`).
 3. Implementar la clase/función con `run(input, ctx): Promise<Salida>`, validando la respuesta del `LLMProvider` con el esquema zod de salida (reintento con el error de validación, luego error controlado).
 4. Registrar el agente en el grafo de ejecución de `packages/orchestrator`.
 5. Escribir un test unitario con `MockProvider` y una fixture de respuesta fija — sin llamadas reales a la API.

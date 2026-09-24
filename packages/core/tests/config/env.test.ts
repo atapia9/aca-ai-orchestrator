@@ -14,6 +14,11 @@ describe("cargarEnv", () => {
     expect(env.MAX_USD_PER_RUN).toBe(1.25);
   });
 
+  it("trata ANTHROPIC_API_KEY='' (como la deja .env.example) igual que si no estuviera dada", () => {
+    const env = cargarEnv({ ANTHROPIC_MODEL: "claude-sonnet-5", ANTHROPIC_API_KEY: "" });
+    expect(env.ANTHROPIC_API_KEY).toBeUndefined();
+  });
+
   it("lanza ConfigError si falta ANTHROPIC_MODEL", () => {
     expect(() => cargarEnv({})).toThrow(ConfigError);
   });

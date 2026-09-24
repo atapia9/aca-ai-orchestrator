@@ -78,6 +78,18 @@ importers:
         specifier: ^4.6.5
         version: 4.6.5
 
+  packages/evals:
+    dependencies:
+      '@acambaro/core':
+        specifier: workspace:*
+        version: link:../core
+      '@acambaro/orchestrator':
+        specifier: workspace:*
+        version: link:../orchestrator
+      dotenv:
+        specifier: ^18.0.3
+        version: 18.0.3
+
   packages/mcp-client:
     dependencies:
       '@acambaro/core':

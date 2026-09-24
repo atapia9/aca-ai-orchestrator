@@ -1,0 +1,21 @@
+{
+  "id": "panaderia-la-espiga-dorada",
+  "nombre": "Panadería La Espiga Dorada",
+  "categoria": "panaderia",
+  "descripcion": "Panadería tradicional de barrio: pan de dulce, bolillo y pasteles por encargo, todo horneado en casa desde hace más de 20 años.",
+  "direccion": "Calle Morelos 88",
+  "colonia": "San Nicolás",
+  "telefono": "417-555-0155",
+  "horario": {
+    "lun": ["06:30-20:00"],
+    "mar": ["06:30-20:00"],
+    "mie": ["06:30-20:00"],
+    "jue": ["06:30-20:00"],
+    "vie": ["06:30-20:00"],
+    "sab": ["06:30-21:00"],
+    "dom": ["07:00-14:00"]
+  },
+  "etiquetas": ["pan", "reposteria", "tradicional"],
+  "actualizado": "2026-09-20",
+  "ficticio": true
+}

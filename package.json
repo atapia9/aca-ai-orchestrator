@@ -21,7 +21,8 @@
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
     "clean": "tsc --build --clean",
-    "orchestrate": "node apps/cli/dist/index.js"
+    "orchestrate": "node apps/cli/dist/index.js",
+    "eval": "node packages/evals/dist/index.js"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

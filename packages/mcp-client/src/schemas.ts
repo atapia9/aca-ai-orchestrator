@@ -1,8 +1,7 @@
+import { negocioSchema, type Dia } from "@acambaro/core";
 import { z } from "zod";
 
-export const DIAS = ["lun", "mar", "mie", "jue", "vie", "sab", "dom"] as const;
-export const diaSchema = z.enum(DIAS);
-export type Dia = (typeof DIAS)[number];
+export type { Dia };
 
 export const negocioResumenSchema = z.object({
   id: z.string(),
@@ -13,26 +12,9 @@ export const negocioResumenSchema = z.object({
 });
 export type NegocioResumen = z.infer<typeof negocioResumenSchema>;
 
-export const negocioDetalleSchema = z.object({
-  id: z.string(),
-  nombre: z.string(),
-  categoria: z.string(),
-  descripcion: z.string(),
-  direccion: z.string(),
-  colonia: z.string(),
-  telefono: z.string().optional(),
-  whatsapp: z.string().optional(),
-  sitio_web: z.string().optional(),
-  redes: z
-    .object({
-      facebook: z.string().optional(),
-      instagram: z.string().optional(),
-      google_maps: z.string().optional(),
-    })
-    .optional(),
-  horario: z.record(z.string(), z.array(z.string())),
-  etiquetas: z.array(z.string()),
-  actualizado: z.string(),
+/** El shape de Negocio (@acambaro/core) más abierto_ahora, que es un dato
+ * derivado de la hora de la consulta, no un hecho propio del negocio. */
+export const negocioDetalleSchema = negocioSchema.extend({
   abierto_ahora: z.boolean(),
 });
 export type NegocioDetalle = z.infer<typeof negocioDetalleSchema>;
@@ -43,6 +25,12 @@ export const busquedaResultadoSchema = z.object({
 });
 export type BusquedaResultado = z.infer<typeof busquedaResultadoSchema>;
 
+/**
+ * Nota: esta es la tool `diagnostico_digital` del propio mcp-directorio
+ * (reglas fijas sobre 6 factores booleanos, sin LLM) - distinta del
+ * `Diagnostico` de @acambaro/core, que es la salida del agente 2 del
+ * orquestador (6 dimensiones puntuadas por el modelo).
+ */
 export const diagnosticoDigitalSchema = z.object({
   id: z.string(),
   nombre: z.string(),

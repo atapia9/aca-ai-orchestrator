@@ -12,6 +12,7 @@
     "test": "vitest run"
   },
   "dependencies": {
+    "@acambaro/core": "workspace:*",
     "@modelcontextprotocol/sdk": "^1.30.0",
     "mcp-directorio-acambaro": "workspace:*",
     "zod": "^4.6.5"

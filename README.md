@@ -104,7 +104,7 @@ Ver [`CLAUDE.md`](CLAUDE.md) para las convenciones del repo.
 
 ## Roadmap
 
-MVP1 (Fases 0-5) está completo. Lo que sigue para MVP2 — datos reales de directorio (DENUE), CI, API HTTP/panel web, publicación directa a WhatsApp/Meta/Google Business, y endurecer un par de heurísticas conocidas — está priorizado en [`docs/ROADMAP.md`](docs/ROADMAP.md).
+MVP1 (Fases 0-5) está completo. Lo que sigue para MVP2 — datos reales de directorio (DENUE), branch protection sobre el check de CI, API HTTP/panel web, publicación directa a WhatsApp/Meta/Google Business, y endurecer un par de heurísticas conocidas — está priorizado en [`docs/ROADMAP.md`](docs/ROADMAP.md).
 
 ## Licencia
 

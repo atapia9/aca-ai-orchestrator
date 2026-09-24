@@ -33,7 +33,7 @@ Desglose por agente de la corrida demo (`run-summary.json`): Diagnóstico $0.021
 ## Deuda técnica conocida
 
 1. **`packages/mcp-directorio/data/inegi/` usa datos de muestra**, no datos reales del DENUE — el directorio no tiene negocios reales de Acámbaro todavía.
-2. **Sin CI** (GitHub Actions ni equivalente): el gate de lint/typecheck/test/build solo se ha corrido localmente antes de cada commit.
+2. **CI sin verificar hasta este PR**: `.github/workflows/ci.yml` existe desde la Fase 2, pero solo dispara contra `main` — que no existió hasta abrir el PR de este cierre —, así que nunca se había ejecutado. Al abrirlo, corrió por primera vez y reveló un bug real de configuración (`pnpm/action-setup` con `version: 10` chocando con el `packageManager: "pnpm@10.33.0"` de `package.json`), ya corregido; falta todavía una regla de branch protection que lo exija antes de mergear.
 3. **`ProveedorDemo`** (`packages/core/src/llm/proveedor-demo.ts`) elige su respuesta fija según un substring del prompt de sistema — funciona hoy porque yo controlo el texto de los 5 prompts, pero se rompe en silencio si alguno cambia de redacción sin actualizar el matching.
 4. **`pareceEspanol`** (`packages/evals/src/criterios.ts`) es una heurística de stopwords, no detección de idioma real — puede dar falsos positivos/negativos en textos cortos o mixtos.
 5. **Cobertura de branches más baja en las rutas de orquestación** (`grafo.ts` 72%, `reportes.ts` 62.5%) — las ramas sin cubrir son sobre todo las rutas de aprobación `"no"` / `"editar"` menos transitadas, no la lógica central del grafo.
@@ -43,7 +43,7 @@ Desglose por agente de la corrida demo (`run-summary.json`): Diagnóstico $0.021
 ## Próximos pasos priorizados para MVP2
 
 1. **Datos reales del directorio (DENUE)** — conectar la API DENUE del INEGI en `packages/mcp-directorio/data/inegi/` para operar con negocios reales de Acámbaro, no solo con `--manual`.
-2. **CI en GitHub Actions** — correr `lint`/`typecheck`/`test`/`build` en cada push/PR; hoy una regresión puede llegar a `main` sin que nadie la note.
+2. **Branch protection en `main` que exija el check de CI** — el workflow ya corre y pasa (ver deuda técnica arriba); falta la regla que lo haga obligatorio antes de mergear.
 3. **API HTTP + panel web** — una capa delgada sobre `ejecutarDiagnosticoExpres` para que alguien del equipo de SDDA sin acceso a terminal dispare diagnósticos y apruebe la recomendación.
 4. **Publicación directa (WhatsApp Business / Meta / Google Business Profile)** — cerrar el ciclo "diagnóstico → contenido publicado" en vez de copiar/pegar a mano las 3 publicaciones que genera el agente de Contenido.
 5. **Endurecer las heurísticas frágiles y agregar métricas entre corridas** — reemplazar el content-matching de `ProveedorDemo` y el detector de español de `pareceEspanol` por algo más robusto; acumular costo/latencia entre corridas antes de escalar el volumen de diagnósticos.

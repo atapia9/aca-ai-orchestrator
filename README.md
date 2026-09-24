@@ -4,7 +4,7 @@
 > Cada salida se valida con zod antes de tocar disco, y un tope de gasto (`MAX_USD_PER_RUN`) se verifica antes de cada llamada al modelo — nunca después.
 > Construido por [Armando Tapia](https://github.com/atapia9) para **SDDA — Servicios Digitales de Acámbaro**, la marca de consultoría de Acambaro.com.mx.
 
-**Estado:** MVP1 completo (Fases 0-5). Ver el [informe de cierre](docs/CIERRE-MVP1.md) (qué se entregó, métricas, deuda técnica) y [`docs/ROADMAP.md`](docs/ROADMAP.md) para los siguientes pasos hacia MVP2.
+**Estado:** MVP1 completo (Fases 0-5, ver el [informe de cierre](docs/CIERRE-MVP1.md)). MVP2 en curso: el directorio ya puede poblarse con negocios reales de Acámbaro vía la API DENUE del INEGI (`pnpm importar-denue`, ver [`packages/mcp-directorio/data/inegi/README.md`](packages/mcp-directorio/data/inegi/README.md)). Detalle y siguientes pasos en [`docs/ROADMAP.md`](docs/ROADMAP.md).
 
 ## Arquitectura
 
@@ -79,7 +79,7 @@ Un ejemplo real (corrida `--live` contra la API de Anthropic, negocio ficticio) 
 ```
 apps/cli/                 Punto de entrada: comando `orchestrate`
 packages/core/            Tipos de dominio, esquemas zod, config, LLMProvider
-packages/mcp-directorio/  Servidor MCP del directorio de negocios (migrado, historial conservado)
+packages/mcp-directorio/  Servidor MCP del directorio de negocios (migrado, historial conservado; ahora con importador de datos reales vía DENUE)
 packages/mcp-client/      Cliente tipado hacia el MCP del directorio
 packages/agents/          Los 5 agentes especializados
 packages/orchestrator/    Grafo de ejecución, estado, aprobación humana
@@ -104,7 +104,12 @@ Ver [`CLAUDE.md`](CLAUDE.md) para las convenciones del repo.
 
 ## Roadmap
 
-MVP1 (Fases 0-5) está completo. Lo que sigue para MVP2 — datos reales de directorio (DENUE), branch protection sobre el check de CI, API HTTP/panel web, publicación directa a WhatsApp/Meta/Google Business, y endurecer un par de heurísticas conocidas — está priorizado en [`docs/ROADMAP.md`](docs/ROADMAP.md).
+MVP1 (Fases 0-5) está completo. De MVP2:
+
+- ✅ **Datos reales del directorio (DENUE)** — `pnpm importar-denue` ya está verificado contra la API real del INEGI (miles de candidatos reales para Acámbaro). Falta completar a mano, por negocio y con su consentimiento, los campos que DENUE no trae antes de pasar alguno al directorio en vivo.
+- 🔜 Branch protection sobre el check de CI, API HTTP/panel web, publicación directa a WhatsApp/Meta/Google Business, y endurecer un par de heurísticas conocidas.
+
+Detalle completo en [`docs/ROADMAP.md`](docs/ROADMAP.md).
 
 ## Licencia
 

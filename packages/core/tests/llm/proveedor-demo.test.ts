@@ -1,12 +1,10 @@
-import {
-  crearPropuestaLlmSchema,
-  diagnosticoLlmSchema,
-  publicacionesLlmSchema,
-  recomendacionLlmSchema,
-  type Servicio,
-} from "@acambaro/core";
 import { describe, expect, it } from "vitest";
-import { ProveedorDemo } from "../src/proveedor-demo.js";
+import { crearPropuestaLlmSchema } from "../../src/types/propuesta.js";
+import { diagnosticoLlmSchema } from "../../src/types/diagnostico.js";
+import { publicacionesLlmSchema } from "../../src/types/publicacion.js";
+import { recomendacionLlmSchema } from "../../src/types/recomendacion.js";
+import type { Servicio } from "../../src/config/servicios.js";
+import { ProveedorDemo } from "../../src/llm/proveedor-demo.js";
 
 const servicioHipotesis: Servicio = {
   id: "diagnostico-expres",

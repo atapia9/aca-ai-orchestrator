@@ -4,6 +4,7 @@ import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import {
   AnthropicProvider,
+  ProveedorDemo,
   cargarEnv,
   cargarEscaleraServicios,
   negocioSchema,
@@ -13,7 +14,6 @@ import { DirectorioClient } from "@acambaro/mcp-client";
 import { ejecutarDiagnosticoExpres, existeEstado } from "@acambaro/orchestrator";
 import { aprobarInteractivo } from "./aprobacion.js";
 import { parsearArgumentos } from "./argumentos.js";
-import { ProveedorDemo } from "./proveedor-demo.js";
 import { fechaHoy, slugify } from "./slug.js";
 
 async function main(): Promise<void> {

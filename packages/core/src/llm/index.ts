@@ -6,4 +6,5 @@ export type {
 } from "./provider.js";
 export { AnthropicProvider, type AnthropicProviderOptions } from "./anthropic-provider.js";
 export { MockProvider } from "./mock-provider.js";
+export { ProveedorDemo } from "./proveedor-demo.js";
 export { generarConReintento } from "./reintento.js";

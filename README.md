@@ -8,6 +8,12 @@
 
 **Estado:** MVP1 completo (Fases 0-5, ver el [informe de cierre](docs/CIERRE-MVP1.md)). MVP2 en curso: el directorio ya puede poblarse con negocios reales de Acámbaro vía la API DENUE del INEGI (`pnpm importar-denue`, ver [`packages/mcp-directorio/data/inegi/README.md`](packages/mcp-directorio/data/inegi/README.md)). Detalle y siguientes pasos en [`docs/ROADMAP.md`](docs/ROADMAP.md).
 
+## Problema y solución
+
+**Problema.** SDDA necesita producir, para cada negocio local de Acámbaro, un diagnóstico de presencia digital, una recomendación de servicio, contenido para redes y una propuesta comercial.
+
+**Solución.** Un orquestador que encadena cinco agentes de IA sobre esos pasos, deja una aprobación humana antes de la propuesta y valida cada salida con zod. Un tope de gasto por corrida se verifica antes de cada llamada al modelo.
+
 ## Arquitectura
 
 ```mermaid
@@ -32,6 +38,10 @@ flowchart TD
 ```
 
 Detalle completo (paquetes, dependencias, decisiones clave) en [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
+
+## Stack
+
+TypeScript estricto (ESM, project references) · Node.js ^22.12 / ^24 / ≥26 · pnpm 10 (monorepo) · Claude API (`@anthropic-ai/sdk`) · Model Context Protocol (SDK oficial; cliente y servidor) · zod · pino · Vitest · ESLint y Prettier · GitHub Actions
 
 ## Instalación
 
@@ -104,6 +114,12 @@ pnpm eval --live   # evals contra la API real - gasta dinero de verdad
 
 Ver [`CLAUDE.md`](CLAUDE.md) para las convenciones del repo.
 
+## Estado y límites
+
+- **Los datos de ejemplo son ficticios.** Los datos reales del DENUE (INEGI) se importan a un archivo que no se versiona (`.gitignore`). Falta completar a mano, con el consentimiento de cada negocio, los campos que DENUE no trae antes de publicarlos en el directorio.
+- **Sin release publicado** y sin protección de ramas sobre el check de CI (pendiente; ver el roadmap).
+- **Origen del servidor MCP.** `packages/mcp-directorio` proviene de [mcp-directorio-acambaro](https://github.com/atapia9/mcp-directorio-acambaro) y se integró con su historial de git ([ADR 0002](docs/ADR/0002-migracion-mcp-directorio.md)). El desarrollo activo continúa aquí: este paquete ya incluye el importador del DENUE.
+
 ## Roadmap
 
 MVP1 (Fases 0-5) está completo. De MVP2:
@@ -116,3 +132,7 @@ Detalle completo en [`docs/ROADMAP.md`](docs/ROADMAP.md).
 ## Licencia
 
 MIT — ver [`LICENSE`](LICENSE).
+
+---
+
+> Este material fue elaborado con asistencia de Claude (Anthropic) y revisado por Jesús Armando Tapia Gallegos.
